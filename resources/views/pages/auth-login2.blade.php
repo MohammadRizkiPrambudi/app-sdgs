@@ -37,10 +37,9 @@
                             alt="logo"
                             width="80"
                             class="shadow-light rounded-circle mb-5 mt-2">
-                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span>
+                        <h4 class="text-dark font-weight-normal">Selamat Datang di <span class="font-weight-bold">E-Learning</span>
                         </h4>
-                        <p class="text-muted">Before you get started, you must login or register if you don't already
-                            have an account.</p>
+                        <p class="text-muted">"Tujuan aplikasi ini adalah menyediakan suara dalam materi untuk membantu siswa yang kesulitan membaca."</p>
                         <form method="POST"
                             action="#"
                             class="needs-validation"
@@ -49,7 +48,7 @@
                                 <label for="email">Email</label>
                                 <input id="email"
                                     type="email"
-                                    class="form-control"
+                                    class="form-control rounded-box"
                                     name="email"
                                     tabindex="1"
                                     required
@@ -66,7 +65,7 @@
                                 </div>
                                 <input id="password"
                                     type="password"
-                                    class="form-control"
+                                    class="form-control rounded-box"
                                     name="password"
                                     tabindex="2"
                                     required>
@@ -93,24 +92,24 @@
                                     Forgot Password?
                                 </a>
                                 <button type="submit"
-                                    class="btn btn-primary btn-lg btn-icon icon-right"
+                                    class="rounded-box btn btn-primary btn-lg btn-icon icon-right"
                                     tabindex="4">
                                     Login
                                 </button>
                             </div>
 
                             <div class="mt-5 text-center">
-                                Don't have an account? <a href="auth-register.html">Create new one</a>
+                                Belum punya akun? <a href="{{ url('auth-register') }}">Buat akun baru</a>
                             </div>
                         </form>
 
                         <div class="text-small mt-5 text-center">
-                            Copyright &copy; Your Company. Made with 💙 by Stisla
-                            <div class="mt-2">
+                            Copyright &copy; Your Company. Made with 💙 by Team Pengembangan E-Learning
+                            {{-- <div class="mt-2">
                                 <a href="#">Privacy Policy</a>
                                 <div class="bullet"></div>
                                 <a href="#">Terms of Service</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

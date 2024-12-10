@@ -3651,3 +3651,7 @@ body.layout-3 .main-wrapper {
     opacity: 0;
   }
 }
+
+.rounded-box {
+  border-radius: 10px;
+}
