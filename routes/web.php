@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClassController;
+use App\Http\Controllers\MaterialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 Route::resource('classes', ClassController::class);
-Route::resource('assignments', AssignmentController::class);
+// Route::resource('assignments', AssignmentController::class);
 Route::resource('materials', MaterialController::class);
 
 Route::redirect('/', '/dashboard-general-dashboard');
