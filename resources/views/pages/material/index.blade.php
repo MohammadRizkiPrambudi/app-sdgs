@@ -43,7 +43,8 @@
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $material->title }}</td>
                                                     <td>{{ $material->class->name }}</td>
-                                                    <td> <a href="{{ route('materials.show', $material->id) }}"
+                                                    <td>
+                                                        <a href="{{ route('materials.show', $material->id) }}"
                                                             class="btn btn-info">Lihat</a> <a
                                                             href="{{ route('materials.edit', $material->id) }}"
                                                             class="btn btn-warning">Edit</a>
