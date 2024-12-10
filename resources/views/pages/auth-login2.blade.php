@@ -37,7 +37,7 @@
                             alt="logo"
                             width="80"
                             class="shadow-light rounded-circle mb-5 mt-2">
-                        <h4 class="text-dark font-weight-normal">Selamat Datang di <span class="font-weight-bold">E-Learning</span>
+                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">E-Learning</span>
                         </h4>
                         <p class="text-muted">"Tujuan aplikasi ini adalah menyediakan suara dalam materi untuk membantu siswa yang kesulitan membaca."</p>
                         <form method="POST"
