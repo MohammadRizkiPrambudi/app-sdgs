@@ -2894,7 +2894,7 @@ pre {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 10px;
   border: none;
   position: relative;
   margin-bottom: 30px;
@@ -3654,4 +3654,8 @@ body.layout-3 .main-wrapper {
 
 .rounded-box {
   border-radius: 10px;
+}
+.text-bold {
+  font-size: 12px;
+  font-weight: bold;
 }

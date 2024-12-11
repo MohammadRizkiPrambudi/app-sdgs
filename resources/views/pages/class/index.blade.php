@@ -21,7 +21,7 @@
                                 <h4>Data Kelas</h4>
                             </div>
                             <div class="card-body">
-                                <a href="{{ route('classes.create') }}" class="btn btn-primary mb-3"><i
+                                <a href="{{ route('classes.create') }}" class="rounded-box btn btn-primary mb-3"><i
                                         class="fas fa-plus-circle"></i> Tambah
                                     Kelas</a>
                                 <div class="table-responsive">
@@ -53,7 +53,7 @@
                                                         <form action="{{ route('classes.destroy', $class->id) }}"
                                                             method="POST" style="display:inline-block;"> @csrf
                                                             @method('DELETE') <button type="submit"
-                                                                class="btn btn-danger"><i
+                                                                class="btn btn-danger" data-confirm-delete="true"><i
                                                                     class="fas fa-trash"></i>Hapus</button> </form>
                                                     </td>
                                                 </tr>

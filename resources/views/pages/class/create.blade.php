@@ -23,9 +23,9 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group ">
                                                 <label for="name">Nama Kelas</label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control rounded-box" id="name" name="name"
                                                     required>
                                             </div>
                                         </div>
@@ -34,7 +34,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="teacher_id">Guru</label>
-                                                <select class="form-control" id="teacher_id" name="teacher_id">
+                                                <select class="form-control rounded-box" id="teacher_id" name="teacher_id">
                                                     @foreach ($teachers as $teacher)
                                                         <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                                     @endforeach
@@ -46,7 +46,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="subject_id">Mata Pelajaran</label>
-                                                <select class="form-control" id="subject_id" name="subject_id">
+                                                <select class="form-control rounded-box" id="subject_id" name="subject_id">
                                                     @foreach ($subjects as $subject)
                                                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                                     @endforeach
@@ -54,9 +54,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary"><i
+                                    <button type="submit" class="btn btn-primary rounded-box"><i
                                             class="fas fa-save mr-1"></i>Simpan</button>
-                                    <a href="{{ route('classes.index') }}" class="btn btn-danger"><i
+                                    <a href="{{ route('classes.index') }}" class="btn btn-danger rounded-box"><i
                                             class="fas fa-arrow-left"></i>
                                         Kembali</a>
                                 </form>

@@ -11,18 +11,18 @@
 
 @section('main')<div class="main-content">
         <section class="section">
-            <div class="section-header">
+            <div class="section-header rounded-box">
                 <h1>Data Materi</h1>
             </div>
             <div class="section-body">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card rounded-box">
                             <div class="card-header">
                                 <h4>Data Materi</h4>
                             </div>
                             <div class="card-body">
-                                <a href="{{ route('materials.create') }}" class="btn btn-primary mb-3"><i
+                                <a href="{{ route('materials.create') }}" class="btn btn-primary rounded-box mb-3"><i
                                         class="fas fa-plus-circle"></i> Tambah
                                     Materi</a>
                                 <div class="table-responsive">
@@ -46,12 +46,12 @@
                                                     <td>{{ $material->class->name }}</td>
                                                     <td>
                                                         <a href="{{ route('materials.show', $material->id) }}"
-                                                            class="btn btn-info">Lihat</a> <a
+                                                            class="btn btn-info rounded-box">Lihat</a> <a
                                                             href="{{ route('materials.edit', $material->id) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning rounded-box">Edit</a>
                                                         <form action="{{ route('materials.destroy', $material->id) }}"
                                                             method="POST" style="display:inline-block;"> @csrf
-                                                            @method('DELETE') <button type="submit" class="btn btn-danger"
+                                                            @method('DELETE') <button type="submit" class="btn rounded-box btn-danger"
                                                                 data-confirm-delete="true">Hapus</button> </form>
                                                     </td>
                                                 </tr>
