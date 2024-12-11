@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classes;
 use App\Models\Material;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MaterialController extends Controller
 {
@@ -12,6 +13,9 @@ class MaterialController extends Controller
     {
         $materials = Material::with('class')->get();
         $type_menu = '';
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('pages.material.index', compact('materials', 'type_menu'));
     }
 
@@ -25,7 +29,8 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         Material::create($request->all());
-        return redirect()->route('materials.index')->with('success', 'Materi berhasil dibuat');
+        Alert::success('Hore!', 'Materi Berhasil Ditambahkan');
+        return redirect()->route('materials.index');
     }
 
     public function show(Material $material)
@@ -39,6 +44,19 @@ class MaterialController extends Controller
         $classes = Classes::all();
         $type_menu = '';
         return view('pages.material.edit', compact('material', 'classes', 'type_menu'));
+    }
+
+    public function update(Request $request, Material $material)
+    {
+        $material->update($request->all());
+        Alert::success('Hore!', 'Materi Berhasil DiPerbarui');
+        return redirect()->route('materials.index');
+    }
+
+    public function destroy(Material $material)
+    {
+        $material->delete();
+        return redirect()->route('materials.index');
     }
 
 }

@@ -3,6 +3,7 @@
 @section('title', 'Data Materi')
 
 @push('style')
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
 @endpush
 
 @section('main')<div class="main-content">
@@ -18,39 +19,33 @@
                                 <h4>Perbarui Data Materi</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('materials.update', $class->id) }}" method="post">
+                                <form action="{{ route('materials.update', $material->id) }}" method="post">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="name">Nama Kelas</label>
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                value="{{ $class->name }}" required>
+                                            <label for="title">Judul</label>
+                                            <input type="text" class="form-control" id="title" name="title"
+                                                value="{{ $material->title }}" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="teacher_id">Guru</label>
-                                                <select class="form-control" id="teacher_id" name="teacher_id">
-                                                    @foreach ($teachers as $teacher)
-                                                        <option value="{{ $teacher->id }}"
-                                                            {{ $class->teacher_id == $teacher->id ? 'selected' : '' }}>
-                                                            {{ $teacher->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="content">Konten</label>
+                                                <textarea class="form-control summernote" id="content" name="content" rows="5" required>{{ $material->content }}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="subject_id">Mata Pelajaran</label>
-                                                <select class="form-control" id="subject_id" name="subject_id">
-                                                    @foreach ($subjects as $subject)
-                                                        <option value="{{ $subject->id }}"
-                                                            {{ $class->subject_id == $subject->id ? 'selected' : '' }}>
-                                                            {{ $subject->name }}</option>
+                                                <label for="class_id">Kelas</label>
+                                                <select class="form-control" id="class_id" name="class_id">
+                                                    @foreach ($classes as $class)
+                                                        <option value="{{ $class->id }}"
+                                                            {{ $material->class_id == $class->id ? 'selected' : '' }}>
+                                                            {{ $class->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -58,7 +53,7 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary"><i
                                             class="fas fa-save mr-1"></i>Perbarui</button>
-                                    <a href="{{ route('classes.index') }}" class="btn btn-danger"><i
+                                    <a href="{{ route('materials.index') }}" class="btn btn-danger"><i
                                             class="fas fa-arrow-left"></i>
                                         Kembali</a>
                                 </form>
@@ -72,4 +67,5 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
 @endpush

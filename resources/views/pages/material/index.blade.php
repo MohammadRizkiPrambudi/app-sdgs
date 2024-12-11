@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('title', 'Data Materi')
 
 @push('style')
@@ -50,8 +51,8 @@
                                                             class="btn btn-warning">Edit</a>
                                                         <form action="{{ route('materials.destroy', $material->id) }}"
                                                             method="POST" style="display:inline-block;"> @csrf
-                                                            @method('DELETE') <button type="submit"
-                                                                class="btn btn-danger">Hapus</button> </form>
+                                                            @method('DELETE') <button type="submit" class="btn btn-danger"
+                                                                data-confirm-delete="true">Hapus</button> </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

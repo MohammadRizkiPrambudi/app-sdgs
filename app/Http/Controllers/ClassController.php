@@ -6,12 +6,16 @@ use App\Models\Classes;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ClassController extends Controller
 {
     public function index()
     {
         $classes = Classes::with('teacher', 'subject')->get();
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         $type_menu = '';
         return view('pages.class.index', compact('classes', 'type_menu'));
     }
@@ -20,13 +24,15 @@ class ClassController extends Controller
         $teachers = Teacher::all();
         $subjects = Subject::all();
         $type_menu = '';
+
         return view('pages.class.create', compact('teachers', 'subjects', 'type_menu'));
     }
 
     public function store(Request $request)
     {
         Classes::create($request->all());
-        return redirect()->route('classes.index')->with('success', 'Kelas berhasil dibuat');
+        Alert::success('Hore!', 'Kelas Berhasil Ditambahkan');
+        return redirect()->route('classes.index');
     }
 
     public function edit(Classes $class)
@@ -40,13 +46,14 @@ class ClassController extends Controller
     public function update(Request $request, Classes $class)
     {
         $class->update($request->all());
-        return redirect()->route('classes.index')->with('success', 'Kelas berhasil diperbarui');
+        Alert::success('Hore!', 'Kelas Berhasil DiPerbarui');
+        return redirect()->route('classes.index');
     }
 
     public function destroy(Classes $class)
     {
         $class->delete();
-        return redirect()->route('classes.index')->with('success', 'Kelas berhasil dihapus');
+        return redirect()->route('classes.index');
     }
 
 }
