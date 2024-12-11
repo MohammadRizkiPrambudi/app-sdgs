@@ -17,15 +17,17 @@
                         Kelas</span></a>
             </li>
             <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('blank-page') }}"><i class="far fa-square"></i> <span>Data
+                <a class="nav-link" href="{{ route('subjects.index') }}"><i class="far fa-square"></i> <span>Data
                         Mapel</span></a>
             </li>
             <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('blank-page') }}"><i class="fas fa-user-graduate"></i> <span>Data
+                <a class="nav-link" href="{{ route('students.index') }}"><i class="fas fa-user-graduate"></i>
+                    <span>Data
                         Siswa</span></a>
             </li>
             <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('blank-page') }}"><i class="fas fa-chalkboard-user"></i> <span>Data
+                <a class="nav-link" href="{{ route('teachers.index') }}"><i class="fas fa-chalkboard-user"></i>
+                    <span>Data
                         Guru </span></a>
             </li>
             <li class="{{ Request::is('blank-page') ? 'active' : '' }}">

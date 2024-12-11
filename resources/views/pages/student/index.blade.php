@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Kelas')
+@section('title', 'Data Mata Pelajaran')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,19 +11,19 @@
 @section('main')<div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Kelas</h1>
+                <h1>Data Peserta Didik</h1>
             </div>
             <div class="section-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Kelas</h4>
+                                <h4>Data Peserta Didik</h4>
                             </div>
                             <div class="card-body">
-                                <a href="{{ route('classes.create') }}" class="rounded-box btn btn-primary mb-3"><i
+                                <a href="{{ route('students.create') }}" class="btn btn-primary mb-3"><i
                                         class="fas fa-plus-circle"></i> Tambah
-                                    Kelas</a>
+                                    Peserta Didik</a>
                                 <div class="table-responsive">
                                     <table class="table-striped table" id="table-1">
                                         <thead>
@@ -31,27 +31,27 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
+                                                <th>Nama</th>
+                                                <th>Email</th>
                                                 <th>Kelas</th>
-                                                <th>Guru</th>
-                                                <th>Mata Pelajaran</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php $no=1; @endphp
-                                            @foreach ($classes as $class)
+                                            @foreach ($students as $student)
                                                 <tr>
                                                     <td>
                                                         {{ $no++ }}
                                                     </td>
-                                                    <td>{{ $class->name }}</td>
-                                                    <td>{{ $class->teacher->name }}</td>
-                                                    <td>{{ $class->subject->name }}</td>
+                                                    <td>{{ $student->name }}</td>
+                                                    <td>{{ $student->email }}</td>
+                                                    <td>{{ $student->grade }}</td>
                                                     <td>
-                                                        <a href="{{ route('classes.edit', $class->id) }}"
-                                                            class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                                        <a href="{{ route('classes.destroy', $class->id) }}"
-                                                            class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</a>
+                                                        <a href="{{ route('students.edit', $student->id) }}"
+                                                            class="btn btn-warning">Edit</a>
+                                                        <a href="{{ route('students.destroy', $student->id) }}"
+                                                            class="btn btn-danger" data-confirm-delete="true">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

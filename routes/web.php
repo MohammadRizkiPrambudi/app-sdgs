@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::resource('classes', ClassController::class);
 // Route::resource('assignments', AssignmentController::class);
 Route::resource('materials', MaterialController::class);
+Route::resource('teachers', TeacherController::class);
+Route::resource('subjects', SubjectController::class);
+Route::resource('students', StudentController::class);
 
 Route::redirect('/', '/dashboard-general-dashboard');
-
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
     return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);

@@ -49,13 +49,14 @@ class MaterialController extends Controller
     public function update(Request $request, Material $material)
     {
         $material->update($request->all());
-        Alert::success('Hore!', 'Materi Berhasil DiPerbarui');
+        Alert::success('Hore!', 'Materi Berhasil Diperbarui');
         return redirect()->route('materials.index');
     }
 
     public function destroy(Material $material)
     {
         $material->delete();
+        Alert::success('Hore!', 'Materi Berhasil Dihapus');
         return redirect()->route('materials.index');
     }
 

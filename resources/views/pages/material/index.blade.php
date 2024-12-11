@@ -49,10 +49,8 @@
                                                             class="btn btn-info rounded-box">Lihat</a> <a
                                                             href="{{ route('materials.edit', $material->id) }}"
                                                             class="btn btn-warning rounded-box">Edit</a>
-                                                        <form action="{{ route('materials.destroy', $material->id) }}"
-                                                            method="POST" style="display:inline-block;"> @csrf
-                                                            @method('DELETE') <button type="submit" class="btn rounded-box btn-danger"
-                                                                data-confirm-delete="true">Hapus</button> </form>
+                                                        <a href="{{ route('materials.destroy', $material->id) }}"
+                                                            class="btn btn-danger" data-confirm-delete="true">Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -13,10 +13,10 @@ class ClassController extends Controller
     public function index()
     {
         $classes = Classes::with('teacher', 'subject')->get();
+        $type_menu = '';
         $title = 'Delete User!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        $type_menu = '';
         return view('pages.class.index', compact('classes', 'type_menu'));
     }
     public function create()
@@ -46,13 +46,14 @@ class ClassController extends Controller
     public function update(Request $request, Classes $class)
     {
         $class->update($request->all());
-        Alert::success('Hore!', 'Kelas Berhasil DiPerbarui');
+        Alert::success('Hore!', 'Kelas Berhasil Diperbarui');
         return redirect()->route('classes.index');
     }
 
     public function destroy(Classes $class)
     {
         $class->delete();
+        Alert::success('Hore!', 'Kelas Berhasil Dihapus');
         return redirect()->route('classes.index');
     }
 
