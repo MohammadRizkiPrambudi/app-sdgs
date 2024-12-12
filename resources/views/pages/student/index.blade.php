@@ -45,8 +45,8 @@
                                                         {{ $no++ }}
                                                     </td>
                                                     <td>{{ $student->name }}</td>
-                                                    <td>{{ $student->email }}</td>
-                                                    <td>{{ $student->grade }}</td>
+                                                    <td>{{ $student->user->email }}</td>
+                                                    <td>{{ $student->class->name }}</td>
                                                     <td>
                                                         <a href="{{ route('students.edit', $student->id) }}"
                                                             class="btn btn-warning">Edit</a>

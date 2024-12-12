@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -26,11 +27,18 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-        $teacher = new Teacher;
-        $teacher->name = $request->input('name');
-        $teacher->email = $request->input('email');
-        $teacher->password = Hash::make($request->input('password'));
-        $teacher->save();
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role' => 'guru',
+        ]);
+
+        Teacher::create([
+            'name' => $request->input('name'),
+            'user_id' => $user->id,
+        ]);
+
         Alert::success('Hore!', 'Guru Berhasil Ditambahkan');
         return redirect()->route('teachers.index');
     }
@@ -49,20 +57,26 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $teacher->name = $request->input('name');
-        $teacher->email = $request->input('email');
+        $teacher->save();
+
+        $user = $teacher->user;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
 
         if ($request->filled('password')) {
-            $teacher->password = Hash::make($request->input('password'));
+            $user->password = Hash::make($request->input('password'));
         }
 
-        $teacher->save();
+        $user->save();
         Alert::success('Hore!', 'Guru Berhasil Diperbarui');
         return redirect()->route('teachers.index');
     }
 
     public function destroy(Teacher $teacher)
     {
+        $user = $teacher->user;
         $teacher->delete();
+        $user->delete();
         return redirect()->route('teachers.index');
     }
 

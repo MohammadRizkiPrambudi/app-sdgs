@@ -33,7 +33,15 @@
                                             <div class="form-group">
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email"
-                                                    value="{{ $teacher->email }}" required>
+                                                    value="{{ $teacher->user->email }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="password">Kata Sandi</label> <input type="password"
+                                                    class="form-control" id="password" name="password">
                                             </div>
                                         </div>
                                     </div>

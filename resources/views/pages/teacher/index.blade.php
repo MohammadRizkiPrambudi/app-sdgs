@@ -44,11 +44,9 @@
                                                         {{ $no++ }}
                                                     </td>
                                                     <td>{{ $teacher->name }}</td>
-                                                    <td>{{ $teacher->email }}</td>
+                                                    <td>{{ $teacher->user->email }}</td>
                                                     <td>
-                                                        <a href="{{ route('teachers.show', $teacher->id) }}"
-                                                            class="btn btn-info">Lihat</a> <a
-                                                            href="{{ route('teachers.edit', $teacher->id) }}"
+                                                        <a href="{{ route('teachers.edit', $teacher->id) }}"
                                                             class="btn btn-warning">Edit</a>
                                                         <a href="{{ route('teachers.destroy', $teacher->id) }}"
                                                             class="btn btn-danger" data-confirm-delete="true">Delete</a>
