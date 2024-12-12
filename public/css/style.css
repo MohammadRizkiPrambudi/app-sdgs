@@ -61,6 +61,7 @@
 .form-control:focus {
   box-shadow: none !important;
   outline: none;
+  border-radius: 10px;
 }
 
 a {
@@ -109,6 +110,19 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 
 .bg-dark {
   background-color: #191d21 !important;
+}
+
+.bg-card-mini-green  {
+  background-color: #9eded3;
+}
+.bg-card-mini-purple  {
+  background-color: #baabfc;
+}
+.bg-card-mini-orange  {
+  background-color: #fbb679;
+}
+.bg-card-mini-blue  {
+  background-color: #007bff;
 }
 
 .text-primary, .text-primary-all *, .text-primary-all *:before, .text-primary-all *:after {
@@ -199,6 +213,7 @@ select.form-control:not([size]):not([multiple]),
   font-size: 14px;
   padding: 10px 15px;
   height: 42px;
+  border-radius: 10px;
 }
 
 textarea.form-control {
@@ -727,7 +742,7 @@ select.form-control:not([size]):not([multiple]) {
 .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 10px;
   border: none;
   position: relative;
   margin-bottom: 30px;
@@ -953,7 +968,7 @@ select.form-control:not([size]):not([multiple]) {
   width: 80px;
   height: 80px;
   margin: 10px;
-  border-radius: 3px;
+  border-radius: 20px;
   line-height: 94px;
   text-align: center;
   float: left;
@@ -1244,7 +1259,7 @@ table tr:hover .table-links {
 
 /* 3.9 Nav */
 .nav-tabs .nav-item .nav-link {
-  color: #6777ef;
+  color: #85A98F;
 }
 .nav-tabs .nav-item .nav-link.active {
   color: #000;
@@ -1263,10 +1278,10 @@ table tr:hover .table-links {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #6777ef;
+  background-color: #85A98F;
 }
 .nav-pills .nav-item .nav-link {
-  color: #6777ef;
+  color: #85A98F;
   padding-left: 15px !important;
   padding-right: 15px !important;
 }
@@ -1276,7 +1291,7 @@ table tr:hover .table-links {
 .nav-pills .nav-item .nav-link.active {
   box-shadow: 0 2px 6px #acb5f6;
   color: #fff;
-  background-color: #6777ef;
+  background-color: #85A98F;
 }
 .nav-pills .nav-item .nav-link .badge {
   padding: 5px 8px;
@@ -1433,6 +1448,7 @@ h6 .badge {
   line-height: 24px;
   padding: 0.3rem 0.8rem;
   letter-spacing: 0.5px;
+  border-radius: 10px;
 }
 .btn.btn-icon-split {
   position: relative;
@@ -1888,7 +1904,7 @@ h6 .badge {
   left: 0;
   width: 100%;
   height: 115px;
-  background-color: #6777ef;
+  background-color: #85A98F;
   z-index: -1;
 }
 
@@ -2134,10 +2150,10 @@ h6 .badge {
   }
   .nav-collapse .navbar-nav .nav-item .nav-link:hover {
     background-color: #fcfcfd;
-    color: #6777ef;
+    color: #85A98F;
   }
   .nav-collapse .navbar-nav .nav-item:focus > a, .nav-collapse .navbar-nav .nav-item.active > a {
-    background-color: #6777ef;
+    background-color: #85A98F;
     color: #fff;
   }
   .navbar {
@@ -2195,7 +2211,7 @@ a.dropdown-item {
   line-height: 1.2;
 }
 a.dropdown-item:focus, a.dropdown-item:active, a.dropdown-item.active {
-  background-color: #6777ef;
+  background-color: #85A98F;
   color: #fff !important;
 }
 
@@ -2253,7 +2269,7 @@ a.dropdown-item:focus, a.dropdown-item:active, a.dropdown-item.active {
   margin-bottom: 0;
 }
 .dropdown-list .dropdown-item:focus {
-  background-color: #6777ef;
+  background-color: #85A98F;
 }
 .dropdown-list .dropdown-item:focus .dropdown-item-desc {
   color: #fff !important;
@@ -2338,7 +2354,7 @@ a.dropdown-item:focus, a.dropdown-item:active, a.dropdown-item.active {
   margin-top: -6px;
 }
 .dropdown-flag .dropdown-item.active {
-  background-color: #6777ef;
+  background-color: #85A98F;
   color: #fff;
 }
 
@@ -3355,7 +3371,7 @@ body.layout-3 .navbar.navbar-secondary .navbar-nav > .nav-item .dropdown-menu .n
 }
 body.layout-3 .navbar.navbar-secondary .navbar-nav > .nav-item .dropdown-menu .nav-item.active > .nav-link,
 body.layout-3 .navbar.navbar-secondary .navbar-nav > .nav-item .dropdown-menu .nav-item .nav-link:focus {
-  background-color: #6777ef;
+  background-color: #85A98F;
   color: #fff;
 }
 body.layout-3 .main-content {
@@ -3446,7 +3462,7 @@ body.layout-3 .main-footer {
   background-color: #f8fafb;
 }
 .main-sidebar .sidebar-menu li.active a {
-  color: #6777ef;
+  color: #85A98F;
   font-weight: 600;
   background-color: #f8fafb;
 }
@@ -3487,11 +3503,11 @@ body.layout-3 .main-footer {
   font-weight: 400;
 }
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
-  color: #6777ef;
+  color: #85A98F;
   background-color: inherit;
 }
 .main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a {
-  color: #6777ef;
+  color: #85A98F;
   font-weight: 600;
 }
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a i {
@@ -3532,14 +3548,14 @@ body.layout-3 .main-footer {
 }
 
 body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu li.active a {
-  background-color: #6777ef;
+  background-color: #85A98F;
   color: #fff;
 }
 body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu li.active ul.dropdown-menu li a {
   color: #e8ebfd;
 }
 body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu li.active ul.dropdown-menu li a:hover {
-  background-color: #6777ef;
+  background-color: #85A98F;
   color: #fff;
 }
 body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu li.active ul.dropdown-menu li.active a {
@@ -3559,7 +3575,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a:before {
   transform: translateY(-50%);
   height: 25px;
   width: 4px;
-  background-color: #6777ef;
+  background-color: #85A98F;
 }
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-menu li a {
   padding-left: 61px;
@@ -3658,4 +3674,37 @@ body.layout-3 .main-wrapper {
 .text-bold {
   font-size: 12px;
   font-weight: bold;
+}
+
+.bg-card-1 {
+    background-color: rgba(216, 242, 238, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(10px);
+    border: 2px solid #9dded3;
+}
+.bg-card-2 {
+    background-color: rgb(229,223,255);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(10px);
+    border: 2px solid #baabfc;
+}
+.bg-card-3 {
+    background-color: rgb(254,228,204);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(10px);
+    border: 2px solid #fcb474;
+}
+.bg-card-4 {
+    background-color: rgb(204,235,255);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(10px);
+    border: 2px solid #27a8fe;
+}
+
+.p-10 {
+  padding: 8px;
+}
+
+.width-card {
+  width: calc(10% - 16px);
 }
