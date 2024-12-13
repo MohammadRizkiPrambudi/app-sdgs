@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,9 +28,7 @@ class HomeController extends Controller
     public function studentDashboard()
     {
         $student = Auth::user()->student;
-        $enrollments = $student->class;
-        // Materi kelas siswa jika ada // ...
-        return view('student.dashboard', compact('enrollments'));
+        return view('pages.student.dashboard');
     }
 
     public function teacherDashboard()
@@ -44,8 +43,9 @@ class HomeController extends Controller
         $total_students = Student::count();
         $total_teachers = Teacher::count();
         $total_classes = Classes::count();
-        $type_menu = '';
-        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'type_menu'));
+        $total_subjects = Subject::count();
+        $menudashboard = 'active';
+        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects'));
     }
 
 }
