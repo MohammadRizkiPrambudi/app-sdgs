@@ -24,7 +24,8 @@
                     <i class="far fa-user"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
                 </form>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     class="dropdown-item
