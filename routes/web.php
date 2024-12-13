@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +25,26 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::resource('classes', ClassController::class);
-// Route::resource('assignments', AssignmentController::class);
-Route::resource('materials', MaterialController::class);
-Route::resource('teachers', TeacherController::class);
-Route::resource('subjects', SubjectController::class);
-Route::resource('students', StudentController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/student/dashboard', [HomeController::class, 'studentDashboard'])->middleware('role:siswa')->name('student.dashboard');
+    Route::get('/teacher/dashboard', [HomeController::class, 'teacherDashboard'])->middleware('role:guru')->name('teacher.dashboard');
+    Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->middleware('role:admin')->name('admin.dashboard');
+
+    Route::resource('subjects', SubjectController::class)->middleware('role:admin');
+    Route::resource('teachers', TeacherController::class)->middleware('role:admin');
+    Route::resource('students', StudentController::class)->middleware('role:admin');
+    Route::resource('users', UserController::class)->middleware('role:admin');
+    Route::resource('classes', ClassController::class)->middleware('role:admin');
+    Route::resource('materials', MaterialController::class)->middleware('role:admin');
+});
+
+// Route::resource('classes', ClassController::class);
+// Route::resource('materials', MaterialController::class);
+// Route::resource('teachers', TeacherController::class);
+// Route::resource('subjects', SubjectController::class);
+// Route::resource('students', StudentController::class);
+// Route::resource('users', UserController::class);
 
 // Route::redirect('/', '/dashboard-general-dashboard');
 // Dashboard

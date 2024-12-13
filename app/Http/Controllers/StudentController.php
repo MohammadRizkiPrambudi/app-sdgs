@@ -15,17 +15,19 @@ class StudentController extends Controller
     {
         $students = Student::with('class')->get();
         $type_menu = '';
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
+        $menustudent = 'active';
+        $title = 'Hapu Data Peserta Didik!';
+        $text = "Apakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.student.index', compact('students', 'type_menu'));
+        return view('pages.student.index', compact('students', 'type_menu', 'menustudent'));
     }
 
     public function create()
     {
         $type_menu = '';
+        $menustudent = 'active';
         $classes = Classes::all();
-        return view('pages.student.create', compact('type_menu', 'classes'));
+        return view('pages.student.create', compact('type_menu', 'classes', 'menustudent'));
     }
 
     public function store(Request $request)
@@ -48,8 +50,9 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $type_menu = '';
+        $menustudent = 'active';
         $classes = Classes::all();
-        return view('pages.student.edit', compact('student', 'classes', 'type_menu'));
+        return view('pages.student.edit', compact('student', 'classes', 'type_menu', 'menustudent'));
     }
 
     public function update(Request $request, Student $student)

@@ -14,18 +14,19 @@ class ClassController extends Controller
     {
         $classes = Classes::with('teacher', 'subject')->get();
         $type_menu = '';
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
+        $menuclass = 'active';
+        $title = 'Hapus Kelas!';
+        $text = "Apakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.class.index', compact('classes', 'type_menu'));
+        return view('pages.class.index', compact('classes', 'type_menu', 'menuclass'));
     }
     public function create()
     {
         $teachers = Teacher::all();
         $subjects = Subject::all();
         $type_menu = '';
-
-        return view('pages.class.create', compact('teachers', 'subjects', 'type_menu'));
+        $menuclass = 'active';
+        return view('pages.class.create', compact('teachers', 'subjects', 'type_menu', 'menuclass'));
     }
 
     public function store(Request $request)
@@ -40,7 +41,8 @@ class ClassController extends Controller
         $teachers = Teacher::all();
         $subjects = Subject::all();
         $type_menu = '';
-        return view('pages.class.edit', compact('class', 'teachers', 'subjects', 'type_menu'));
+        $menuclass = 'active';
+        return view('pages.class.edit', compact('class', 'teachers', 'subjects', 'type_menu', 'menuclass'));
     }
 
     public function update(Request $request, Classes $class)

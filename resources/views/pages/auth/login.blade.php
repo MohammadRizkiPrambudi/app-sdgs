@@ -33,7 +33,8 @@
                         </h4>
                         <p class="text-muted">"Tujuan aplikasi ini adalah menyediakan suara dalam materi untuk membantu
                             siswa yang kesulitan membaca."</p>
-                        <form method="POST" action="#" class="needs-validation" novalidate="">
+                        <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                            @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input id="email" type="email" class="form-control rounded-box" name="email"

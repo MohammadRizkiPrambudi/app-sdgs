@@ -12,16 +12,18 @@ class SubjectController extends Controller
     {
         $subjects = Subject::all();
         $type_menu = '';
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
+        $menusubject = 'active';
+        $title = 'Hapus Mata Pelajaran!';
+        $text = "Apakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.subject.index', compact('subjects', 'type_menu'));
+        return view('pages.subject.index', compact('subjects', 'type_menu', 'menusubject'));
     }
 
     public function create()
     {
         $type_menu = '';
-        return view('pages.subject.create', compact('type_menu'));
+        $menusubject = 'active';
+        return view('pages.subject.create', compact('type_menu', 'menusubject'));
     }
 
     public function store(Request $request)
@@ -34,7 +36,8 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
         $type_menu = '';
-        return view('pages.subject.edit', compact('subject', 'type_menu'));
+        $menusubject = 'active';
+        return view('pages.subject.edit', compact('subject', 'type_menu', 'menusubject'));
     }
 
     public function update(Request $request, Subject $subject)

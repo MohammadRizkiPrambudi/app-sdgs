@@ -14,15 +14,17 @@ class TeacherController extends Controller
     {
         $teachers = Teacher::all();
         $type_menu = '';
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
+        $menuteacher = 'active';
+        $title = 'Hapus Data Guru!';
+        $text = "Aapakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.teacher.index', compact('teachers', 'type_menu'));
+        return view('pages.teacher.index', compact('teachers', 'type_menu', 'menuteacher'));
     }
     public function create()
     {
         $type_menu = '';
-        return view('pages.teacher.create', compact('type_menu'));
+        $menuteacher = 'active';
+        return view('pages.teacher.create', compact('type_menu', 'menuteacher'));
     }
 
     public function store(Request $request)
@@ -43,15 +45,11 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index');
     }
 
-    public function show(Teacher $teacher)
-    {
-        return view('pages.teachers.show', compact('teacher'));
-    }
-
     public function edit(Teacher $teacher)
     {
         $type_menu = '';
-        return view('pages.teacher.edit', compact('teacher', 'type_menu'));
+        $menuteacher = 'active';
+        return view('pages.teacher.edit', compact('teacher', 'type_menu', 'menuteacher'));
     }
 
     public function update(Request $request, Teacher $teacher)

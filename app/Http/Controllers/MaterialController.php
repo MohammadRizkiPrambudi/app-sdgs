@@ -13,17 +13,19 @@ class MaterialController extends Controller
     {
         $materials = Material::with('class')->get();
         $type_menu = '';
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
+        $menumaterial = 'active';
+        $title = 'Hapus Materi!';
+        $text = "Aapakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.material.index', compact('materials', 'type_menu'));
+        return view('pages.material.index', compact('materials', 'type_menu', 'menumaterial'));
     }
 
     public function create()
     {
         $classes = Classes::all();
         $type_menu = '';
-        return view('pages.material.create', compact('classes', 'type_menu'));
+        $menumaterial = 'active';
+        return view('pages.material.create', compact('classes', 'type_menu', 'menumaterial'));
     }
 
     public function store(Request $request)
@@ -43,7 +45,8 @@ class MaterialController extends Controller
     {
         $classes = Classes::all();
         $type_menu = '';
-        return view('pages.material.edit', compact('material', 'classes', 'type_menu'));
+        $menumaterial = 'active';
+        return view('pages.material.edit', compact('material', 'classes', 'type_menu', 'menumaterial'));
     }
 
     public function update(Request $request, Material $material)
