@@ -23,9 +23,11 @@
                                     @method('PUT')
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="name">Nama</label>
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                value="{{ $student->name }}" required>
+                                            <div class="form-group">
+                                                <label for="name">Nama</label>
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    value="{{ $student->name }}" required>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -33,7 +35,7 @@
                                             <div class="form-group">
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email"
-                                                    value="{{ $student->email }}" required>
+                                                    value="{{ $student->user->email }}" required>
                                             </div>
                                         </div>
                                     </div>

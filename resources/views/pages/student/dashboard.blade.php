@@ -14,20 +14,22 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Informatika</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h6>Daftar Mata Pelajaran</h6>
+            @if ($subject)
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $subject->name }}</h5>
+                                <p class="card-text">{{ $subject->description }}</p>
+                                <a href="#" class="btn btn-primary">Lihat Materi</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <p>Mata pelajaran tidak ditemukan untuk kelas ini.</p>
+            @endif
         </section>
     </div>
 @endsection
