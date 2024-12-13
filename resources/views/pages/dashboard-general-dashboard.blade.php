@@ -15,140 +15,135 @@
                 <h1>Dashboard</h1>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
-                    <div class="card card-statistic-1 bg-card-1">
-                        <div class="card-icon bg-card-mini-green">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Siswa</h4>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                        <div class="card card-statistic-1 bg-card-1">
+                            <div class="card-icon bg-card-mini-green">
+                                <i class="fas fa-user-graduate"></i>
                             </div>
-                            <div class="card-body">
-                                1209
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Siswa</h4>
+                                </div>
+                                <div class="card-body">
+                                    1209
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
-                    <div class="card card-statistic-1 bg-card-2">
-                        <div class="card-icon bg-card-mini-purple">
-                            <i class="far fa-newspaper"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Data Mapel</h4>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                        <div class="card card-statistic-1 bg-card-2">
+                            <div class="card-icon bg-card-mini-purple">
+                                <i class="far fa-newspaper"></i>
                             </div>
-                            <div class="card-body">
-                                42
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Data Mapel</h4>
+                                </div>
+                                <div class="card-body">
+                                    42
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
-                    <div class="card card-statistic-1 bg-card-3">
-                        <div class="card-icon bg-card-mini-orange">
-                            <i class="fa-solid fa-chalkboard-user fa-lg" style="color: #ffffff;"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Guru</h4>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                        <div class="card card-statistic-1 bg-card-3">
+                            <div class="card-icon bg-card-mini-orange">
+                                <i class="fa-solid fa-chalkboard-user fa-lg" style="color: #ffffff;"></i>
                             </div>
-                            <div class="card-body">
-                                1,201
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Guru</h4>
+                                </div>
+                                <div class="card-body">
+                                    1,201
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
-                    <div class="card card-statistic-1 bg-card-4">
-                        <div class="card-icon bg-card-mini-blue">
-                            <i class="fas fa-school fa-lg" style="color: #ffffff;"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Kelas</h4>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                        <div class="card card-statistic-1 bg-card-4">
+                            <div class="card-icon bg-card-mini-blue">
+                                <i class="fas fa-school fa-lg" style="color: #ffffff;"></i>
                             </div>
-                            <div class="card-body">
-                                47
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Kelas</h4>
+                                </div>
+                                <div class="card-body">
+                                    47
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
-                    <div class="card card-statistic-1 bg-card-4">
-                        <div class="card-icon" style="background-color: #85A98F">
-                            <i class="fas fa-school fa-lg" style="color: #ffffff;"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Kelas</h4>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                        <div class="card card-statistic-1 bg-card-4">
+                            <div class="card-icon" style="background-color: #85A98F">
+                                <i class="fas fa-school fa-lg" style="color: #ffffff;"></i>
                             </div>
-                            <div class="card-body">
-                                47
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Kelas</h4>
+                                </div>
+                                <div class="card-body">
+                                    47
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                <div class="col-lg-4 col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Informatika</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          <h5 class="card-title">Informatika</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                <div class="col-lg-4 col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Bahasa Indonesai</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          <h5 class="card-title">Bahasa Indonesai</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                <div class="col-lg-4 col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Computational Thinking</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          <h5 class="card-title">Computational Thinking</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                <div class="col-lg-4 col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Ilmu Pengetahuan Alam</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          <h5 class="card-title">Ilmu Pengetahuan Alam</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                <div class="col-lg-4 col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Ilmu Pengetahuan Sosial</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          <h5 class="card-title">Ilmu Pengetahuan Sosial</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -254,6 +249,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12 col-sm-12">
                     <div class="card">
@@ -306,6 +302,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="card">
@@ -564,6 +561,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-5 col-md-12 col-12 col-sm-12">
                     <form method="post" class="needs-validation" novalidate="">
