@@ -3708,7 +3708,7 @@ body.layout-3 .main-wrapper {
 }
 
 .p-10 {
-  padding: 8px;
+  padding: 5px;
 }
 
 .width-card {
@@ -3728,3 +3728,24 @@ body.layout-3 .main-wrapper {
   overflow: hidden;    /* Memotong teks yang keluar dari elemen */
   text-overflow: ellipsis; /* Menambahkan elipsis (...) jika teks terlalu panjang */
 }
+
+.txt-bold {
+  font-weight: bold;
+  color: #000;
+}
+
+@media (min-width: 992px) {
+  .row.custom-row > .col-lg-3 {
+      flex: 0 0 20%; /* 1/5 dari lebar layar */
+      max-width: 20%;
+  }
+}
+
+.fixed-image {
+  width: 100%; /* Gambar menyesuaikan lebar card */
+  height: 200px; /* Gambar hanya menempati area 200px */
+  object-fit: cover; /* Gambar disesuaikan tanpa mengubah proporsi */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+

@@ -29,7 +29,7 @@
                         <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="80"
                             class="shadow-light rounded-circle mb-5 mt-2">
                         <h4 class="text-dark font-weight-normal">Selamat Datang <span
-                                class="font-weight-bold">E-Learning</span>
+                                class="font-weight-bold">SimakBelajar</span>
                         </h4>
                         <p class="text-muted">"Tujuan aplikasi ini adalah menyediakan suara dalam materi untuk membantu
                             siswa yang kesulitan membaca."</p>
@@ -79,7 +79,7 @@
                         </form>
 
                         <div class="text-small mt-5 text-center">
-                            Copyright &copy; Your Company. Made with 💙 by Team Pengembangan E-Learning
+                            Copyright &copy; SimakBelajar. Made with 💙 by Team Pengembangan SimakBelajar
                             {{-- <div class="mt-2">
                                 <a href="#">Privacy Policy</a>
                                 <div class="bullet"></div>
