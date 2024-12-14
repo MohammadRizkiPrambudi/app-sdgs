@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'General Dashboard')
+@section('title', 'Dashboard Siswa')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -14,19 +14,23 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
-            <h6>Daftar Mata Pelajaran</h6>
-            @if ($subject)
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+            <div class="row">
+                @foreach ($subjects as $subject)
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 p-10">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $subject->name }}</h5>
                                 <p class="card-text">{{ $subject->description }}</p>
-                                <a href="#" class="btn btn-primary">Lihat Materi</a>
+                                <p><strong>Guru:</strong>
+                                    {{ $teacher->name }}</p>
+                                <a href="{{ route('materials.subject', $subject->id) }}" class="btn btn-primary"><i
+                                        class="fas fa-eye mr-1"></i>Lihat
+                                    Materi</a>
                             </div>
                         </div>
                     </div>
-            @endforeach
+                @endforeach
+            </div>
         </section>
     </div>
 @endsection

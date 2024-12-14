@@ -4,26 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $subjects = Subject::all();
-        $type_menu = '';
         $menusubject = 'active';
         $title = 'Hapus Mata Pelajaran!';
         $text = "Apakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.subject.index', compact('subjects', 'type_menu', 'menusubject'));
+        return view('pages.subject.index', compact('subjects', 'menusubject', 'user'));
     }
 
     public function create()
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menusubject = 'active';
-        return view('pages.subject.create', compact('type_menu', 'menusubject'));
+        return view('pages.subject.create', compact('menusubject', 'user'));
     }
 
     public function store(Request $request)
@@ -35,14 +36,15 @@ class SubjectController extends Controller
 
     public function show(Subject $subject)
     {
-        $subject->load('classes', 'materials');
+        $user = Auth::user();
+        $subject->load('classes', 'materials', 'user');
     }
 
     public function edit(Subject $subject)
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menusubject = 'active';
-        return view('pages.subject.edit', compact('subject', 'type_menu', 'menusubject'));
+        return view('pages.subject.edit', compact('subject', 'menusubject', 'user'));
     }
 
     public function update(Request $request, Subject $subject)

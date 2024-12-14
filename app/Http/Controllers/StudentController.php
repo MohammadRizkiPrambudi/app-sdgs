@@ -6,6 +6,7 @@ use App\Models\Classes;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,21 +14,21 @@ class StudentController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $students = Student::with('class')->get();
-        $type_menu = '';
         $menustudent = 'active';
         $title = 'Hapu Data Peserta Didik!';
         $text = "Apakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.student.index', compact('students', 'type_menu', 'menustudent'));
+        return view('pages.student.index', compact('students', 'menustudent', 'user'));
     }
 
     public function create()
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menustudent = 'active';
         $classes = Classes::all();
-        return view('pages.student.create', compact('type_menu', 'classes', 'menustudent'));
+        return view('pages.student.create', compact('classes', 'menustudent', 'user'));
     }
 
     public function store(Request $request)
@@ -49,10 +50,10 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menustudent = 'active';
         $classes = Classes::all();
-        return view('pages.student.edit', compact('student', 'classes', 'type_menu', 'menustudent'));
+        return view('pages.student.edit', compact('student', 'classes', 'menustudent', 'user'));
     }
 
     public function update(Request $request, Student $student)
@@ -76,6 +77,16 @@ class StudentController extends Controller
     {
         $student->delete();
         return redirect()->route('students.index');
+    }
+
+    public function studentclass()
+    {
+        $user = Auth::user();
+        $student = $user->student;
+        $class = $student->class;
+        $students = $class->students;
+        $menustudent = 'active';
+        return view('pages.student.show', compact('class', 'students', 'user', 'menustudent'));
     }
 
 }

@@ -47,9 +47,10 @@
                                                     <td>{{ $user->role }}</td>
                                                     <td>
                                                         <a href="{{ route('users.edit', $user->id) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('users.destroy', $user->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                                class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

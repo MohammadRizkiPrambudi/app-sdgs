@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Material extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'content', 'class_id'];
+    protected $fillable = ['title', 'content', 'class_id', 'subject_id'];
 
     public function class ()
     {

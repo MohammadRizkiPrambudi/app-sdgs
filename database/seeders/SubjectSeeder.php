@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subject;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class SubjectSeeder extends Seeder
 {
@@ -14,15 +14,7 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('subjects')->insert([
-            [
-                'name' => 'Mathematics',
-                'description' => 'Study of numbers',
-            ],
-            [
-                'name' => 'Science',
-                'description' => 'Study of natural phenomena',
-            ],
-        ]);
+        Subject::create(['name' => 'Matematika', 'description' => 'Pelajaran Matematika']);
+        Subject::create(['name' => 'Bahasa Indonesia', 'description' => 'Pelajaran Bahasa Indonesia']);
     }
 }

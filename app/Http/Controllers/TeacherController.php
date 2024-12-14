@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -12,19 +13,19 @@ class TeacherController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $teachers = Teacher::all();
-        $type_menu = '';
         $menuteacher = 'active';
         $title = 'Hapus Data Guru!';
         $text = "Aapakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.teacher.index', compact('teachers', 'type_menu', 'menuteacher'));
+        return view('pages.teacher.index', compact('teachers', 'menuteacher', 'user'));
     }
     public function create()
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menuteacher = 'active';
-        return view('pages.teacher.create', compact('type_menu', 'menuteacher'));
+        return view('pages.teacher.create', compact('menuteacher', 'user'));
     }
 
     public function store(Request $request)
@@ -47,9 +48,9 @@ class TeacherController extends Controller
 
     public function edit(Teacher $teacher)
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menuteacher = 'active';
-        return view('pages.teacher.edit', compact('teacher', 'type_menu', 'menuteacher'));
+        return view('pages.teacher.edit', compact('teacher', 'menuteacher', 'user'));
     }
 
     public function update(Request $request, Teacher $teacher)

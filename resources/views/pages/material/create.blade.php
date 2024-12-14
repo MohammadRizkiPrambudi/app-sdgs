@@ -26,8 +26,8 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label class="" for="title">Judul</label>
-                                                <input type="text" class="form-control  rounded-box" id="title" name="title"
-                                                    required>
+                                                <input type="text" class="form-control  rounded-box" id="title"
+                                                    name="title" required>
                                             </div>
                                         </div>
                                     </div>
@@ -38,6 +38,18 @@
                                                 <select class="form-control  rounded-box" id="class_id" name="class_id">
                                                     @foreach ($classes as $class)
                                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="subject_id">Mata Pelajaran</label>
+                                                <select class="form-control" id="subject_id" name="subject_id" required>
+                                                    @foreach ($subjects as $subject)
+                                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

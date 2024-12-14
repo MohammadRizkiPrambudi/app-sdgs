@@ -32,14 +32,6 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="content">Konten</label>
-                                                <textarea class="form-control summernote" id="content" name="content" rows="5" required>{{ $material->content }}</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
                                                 <label for="class_id">Kelas</label>
                                                 <select class="form-control" id="class_id" name="class_id">
                                                     @foreach ($classes as $class)
@@ -48,6 +40,28 @@
                                                             {{ $class->name }}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="class_id">Mata Pelajaran</label>
+                                                <select class="form-control" id="subject_id" name="subject_id" required>
+                                                    @foreach ($subjects as $subject)
+                                                        <option value="{{ $subject->id }}"
+                                                            {{ $subject->id == $material->subject_id ? 'selected' : '' }}>
+                                                            {{ $subject->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="content">Konten</label>
+                                                <textarea class="form-control summernote" id="content" name="content" rows="5" required>{{ $material->content }}</textarea>
                                             </div>
                                         </div>
                                     </div>

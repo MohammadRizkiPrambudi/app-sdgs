@@ -27,14 +27,16 @@ class HomeController extends Controller
 
     public function studentDashboard()
     {
-        $student = Auth::user()->student;
+        $user = Auth::user();
+        $student = $user->student;
         $class = $student->class;
         if (!$class) {
             return redirect()->route('dashboard')->with('error', 'Class not found for this student.');
         }
         $subjects = $class->subjects;
         $teacher = $class->teacher;
-        return view('pages.student.dashboard', compact('class', 'subjects', 'teacher'));
+        $menudashboard = 'active';
+        return view('pages.student.dashboard', compact('class', 'subjects', 'teacher', 'user', 'menudashboard'));
     }
 
     public function teacherDashboard()
@@ -46,12 +48,13 @@ class HomeController extends Controller
 
     public function adminDashboard()
     {
+        $user = Auth::user();
         $total_students = Student::count();
         $total_teachers = Teacher::count();
         $total_classes = Classes::count();
         $total_subjects = Subject::count();
         $menudashboard = 'active';
-        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects'));
+        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects', 'user'));
     }
 
 }

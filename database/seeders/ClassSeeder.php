@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classes;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ClassSeeder extends Seeder
 {
@@ -14,17 +14,7 @@ class ClassSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('classes')->insert([
-            [
-                'name' => 'Kelas 1-A',
-                'teacher_id' => 1,
-                'subject_id' => 1,
-            ],
-            [
-                'name' => 'Kelas 2-B',
-                'teacher_id' => 2,
-                'subject_id' => 2,
-            ],
-        ]);
+        Classes::create(['name' => 'Kelas 1A', 'teacher_id' => 1]);
+        Classes::create(['name' => 'Kelas 1B', 'teacher_id' => 2]);
     }
 }

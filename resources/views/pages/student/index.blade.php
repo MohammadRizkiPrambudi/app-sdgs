@@ -49,9 +49,10 @@
                                                     <td>{{ $student->class->name }}</td>
                                                     <td>
                                                         <a href="{{ route('students.edit', $student->id) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
                                                         <a href="{{ route('students.destroy', $student->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                                class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

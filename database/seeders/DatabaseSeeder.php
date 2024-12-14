@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\AssignmentSeeder;
 use Database\Seeders\ClassSeeder;
-use Database\Seeders\EnrollmentSeeder;
+use Database\Seeders\MaterialSeeder;
 use Database\Seeders\StudentSeeder;
 use Database\Seeders\SubjectSeeder;
 use Database\Seeders\TeacherSeeder;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,12 +26,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            StudentSeeder::class,
+
+            UserSeeder::class,
             TeacherSeeder::class,
-            SubjectSeeder::class,
             ClassSeeder::class,
-            AssignmentSeeder::class,
-            EnrollmentSeeder::class,
+            SubjectSeeder::class,
+            StudentSeeder::class,
+            ClassSubjectSeeder::class,
+            MaterialSeeder::class,
         ]);
     }
 }

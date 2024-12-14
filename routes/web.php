@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -28,15 +29,23 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/student/dashboard', [HomeController::class, 'studentDashboard'])->middleware('role:siswa')->name('student.dashboard');
+    Route::get('/materials/subject/{subject}', [MaterialController::class, 'materialsBySubject'])->middleware('role:siswa')->name('materials.subject');
+
+    Route::get('/student/student', [StudentController::class, 'StudentClass'])->middleware('role:siswa')->name('student.class');
+
     Route::get('/teacher/dashboard', [HomeController::class, 'teacherDashboard'])->middleware('role:guru')->name('teacher.dashboard');
+
     Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->middleware('role:admin')->name('admin.dashboard');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('subjects', SubjectController::class)->middleware('role:admin');
     Route::resource('teachers', TeacherController::class)->middleware('role:admin');
     Route::resource('students', StudentController::class)->middleware('role:admin');
     Route::resource('users', UserController::class)->middleware('role:admin');
     Route::resource('classes', ClassController::class)->middleware('role:admin');
-    Route::resource('materials', MaterialController::class)->middleware('role:admin');
+    Route::resource('materials', MaterialController::class);
 });
 
 // Route::resource('classes', ClassController::class);

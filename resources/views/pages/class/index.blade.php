@@ -31,7 +31,7 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>#</th>
+                                                <th>Kelas</th>
                                                 <th>Kelas</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -43,16 +43,17 @@
                                                     <td class="text-center">
                                                         {{ $no++ }}
                                                     </td>
-                                                    <th>#</th>
+                                                    <td>{{ $class->name }}</td>
                                                     <td>{{ $class->name }}</td>
                                                     <td>
                                                         <a href="{{ route('classes.show', $class->id) }}"
-                                                            class="btn btn-info">Lihat</a>
+                                                            class="btn btn-info"><i class="fas fa-eye mr-1"></i>Lihat</a>
                                                         <a href="{{ route('classes.edit', $class->id) }}"
-                                                            class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>
+                                                            Edit</a>
                                                         <a href="{{ route('classes.destroy', $class->id) }}"
                                                             class="btn btn-danger" data-confirm-delete="true"><i
-                                                                class="fas fa-trash"></i>Hapus</a>
+                                                                class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

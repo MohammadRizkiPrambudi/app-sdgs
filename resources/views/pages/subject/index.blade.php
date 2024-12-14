@@ -47,9 +47,10 @@
                                                     <td>{{ $subject->description }}</td>
                                                     <td>
                                                         <a href="{{ route('subjects.edit', $subject->id) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('subjects.destroy', $subject->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                                class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

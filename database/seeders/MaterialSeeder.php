@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Material;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class MaterialSeeder extends Seeder
 {
@@ -14,17 +14,17 @@ class MaterialSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('materials')->insert([
-            [
-                'title' => 'Materi Matematika 1',
-                'content' => 'Ini adalah materi untuk kelas 1.',
-                'class_id' => 1,
-            ],
-            [
-                'title' => 'Materi IPA 2',
-                'content' => 'Ini adalah materi untuk kelas 2.',
-                'class_id' => 2,
-            ],
+        Material::create([
+            'title' => 'Materi Matematika Bab 1',
+            'content' => 'Pengenalan Aljabar',
+            'class_id' => 1,
+            'subject_id' => 1,
+        ]);
+        Material::create([
+            'title' => 'Materi Bahasa Indonesia Bab 1',
+            'content' => 'Mengenal Puisi',
+            'class_id' => 1,
+            'subject_id' => 2,
         ]);
     }
 }

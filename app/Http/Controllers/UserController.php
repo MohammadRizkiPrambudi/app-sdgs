@@ -11,20 +11,20 @@ class UserController extends Controller
 {
     public function index()
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menuadmin = 'active';
         $users = User::where('role', 'admin')->get();
         $title = 'Hapus Admin!';
         $text = "Aapakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.user.index', compact('users', 'type_menu', 'menuadmin'));
+        return view('pages.user.index', compact('users', 'user', 'menuadmin'));
     }
 
     public function create()
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menuadmin = 'active';
-        return view('pages.user.create', compact('type_menu', 'menuadmin'));
+        return view('pages.user.create', compact('user', 'menuadmin'));
     }
 
     public function store(Request $request)
@@ -48,9 +48,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $type_menu = '';
+        $user = Auth::user();
         $menuadmin = 'active';
-        return view('pages.user.edit', compact('user', 'type_menu', 'menuadmin'));
+        return view('pages.user.edit', compact('user', 'user', 'menuadmin'));
     }
 
     public function update(Request $request, User $user)

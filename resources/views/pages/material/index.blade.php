@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 @endpush
 
-@section('main')<div class="main-content">
+@section('main')
+    <div class="main-content">
         <section class="section">
             <div class="section-header rounded-box">
                 <h1>Data Materi</h1>
@@ -41,16 +42,19 @@
                                             @php $no=1; @endphp
                                             @foreach ($materials as $material)
                                                 <tr>
-                                                    <td>{{ $no++ }}</td>
+                                                    <td class="text-center">{{ $no++ }}</td>
                                                     <td>{{ $material->title }}</td>
                                                     <td>{{ $material->class->name }}</td>
                                                     <td>
                                                         <a href="{{ route('materials.show', $material->id) }}"
-                                                            class="btn btn-info rounded-box">Lihat</a> <a
+                                                            class="btn btn-info rounded-box"><i
+                                                                class="fas fa-eye mr-1"></i>Lihat</a> <a
                                                             href="{{ route('materials.edit', $material->id) }}"
-                                                            class="btn btn-warning rounded-box">Edit</a>
+                                                            class="btn btn-warning rounded-box"><i
+                                                                class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('materials.destroy', $material->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                                class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
