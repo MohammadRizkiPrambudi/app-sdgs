@@ -33,6 +33,11 @@ class SubjectController extends Controller
         return redirect()->route('subjects.index');
     }
 
+    public function show(Subject $subject)
+    {
+        $subject->load('classes', 'materials');
+    }
+
     public function edit(Subject $subject)
     {
         $type_menu = '';

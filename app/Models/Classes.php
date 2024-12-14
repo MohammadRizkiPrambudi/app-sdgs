@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classes extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'teacher_id', 'subject_id'];
+    protected $fillable = ['name', 'teacher_id'];
 
     public function students()
     {
@@ -18,9 +18,9 @@ class Classes extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
-    public function subject()
+    public function subjects()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->belongsToMany(Subject::class, 'class_subject', 'class_id', 'subject_id');
     }
     public function materials()
     {

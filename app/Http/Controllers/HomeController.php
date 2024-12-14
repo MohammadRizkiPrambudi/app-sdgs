@@ -32,10 +32,9 @@ class HomeController extends Controller
         if (!$class) {
             return redirect()->route('dashboard')->with('error', 'Class not found for this student.');
         }
-        $subjects = Subject::where('id', $class->subject_id)->get();
+        $subjects = $class->subjects;
         $teacher = $class->teacher;
-        $materials = $class->materials;
-        return view('pages.student.dashboard', compact('class', 'subjects', 'teacher', 'materials'));
+        return view('pages.student.dashboard', compact('class', 'subjects', 'teacher'));
     }
 
     public function teacherDashboard()

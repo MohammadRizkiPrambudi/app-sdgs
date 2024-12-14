@@ -31,9 +31,8 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
+                                                <th>#</th>
                                                 <th>Kelas</th>
-                                                <th>Guru</th>
-                                                <th>Mata Pelajaran</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -41,17 +40,19 @@
                                             @php $no=1; @endphp
                                             @foreach ($classes as $class)
                                                 <tr>
-                                                    <td>
+                                                    <td class="text-center">
                                                         {{ $no++ }}
                                                     </td>
+                                                    <th>#</th>
                                                     <td>{{ $class->name }}</td>
-                                                    <td>{{ $class->teacher->name }}</td>
-                                                    <td>{{ $class->subject->name }}</td>
                                                     <td>
+                                                        <a href="{{ route('classes.show', $class->id) }}"
+                                                            class="btn btn-info">Lihat</a>
                                                         <a href="{{ route('classes.edit', $class->id) }}"
                                                             class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
                                                         <a href="{{ route('classes.destroy', $class->id) }}"
-                                                            class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</a>
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                                class="fas fa-trash"></i>Hapus</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

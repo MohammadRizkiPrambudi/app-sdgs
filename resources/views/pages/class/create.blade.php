@@ -25,8 +25,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group ">
                                                 <label for="name">Nama Kelas</label>
-                                                <input type="text" class="form-control rounded-box" id="name" name="name"
-                                                    required>
+                                                <input type="text" class="form-control rounded-box" id="name"
+                                                    name="name" required>
                                             </div>
                                         </div>
                                     </div>
@@ -46,7 +46,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="subject_id">Mata Pelajaran</label>
-                                                <select class="form-control rounded-box" id="subject_id" name="subject_id">
+                                                <select class="form-control" id="subject_id" name="subjects[]" multiple
+                                                    required>
                                                     @foreach ($subjects as $subject)
                                                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                                     @endforeach

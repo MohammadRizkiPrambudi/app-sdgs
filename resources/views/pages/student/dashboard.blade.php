@@ -14,22 +14,22 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
-            <h6>Daftar Mata Pelajaran</h6>
-            @if ($subject)
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+            @if (session('error'))
+                <div class="alert alert-danger"> {{ session('error') }} </div>
+            @endif
+            <div class="row">
+                @foreach ($subjects as $subject)
+                    <div class="col-lg-4 col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $subject->name }}</h5>
                                 <p class="card-text">{{ $subject->description }}</p>
+                                <p class="card-text">Nama Guru : {{ $teacher->name }}</p>
                                 <a href="#" class="btn btn-primary">Lihat Materi</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            @else
-                <p>Mata pelajaran tidak ditemukan untuk kelas ini.</p>
-            @endif
+                @endforeach
         </section>
     </div>
 @endsection
