@@ -14,7 +14,7 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
-            <div class="row">
+            <div class="row d-flex flex-wrap justify-content-between custom-row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
                     <div class="card card-statistic-1 bg-card-1">
                         <div class="card-icon bg-card-mini-green">
@@ -22,9 +22,9 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total Siswa</h4>
+                                <h4 style="font-weight: bold; color: black; white-space: nowrap;">Total Siswa</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body mt-2">
                                 {{ $total_students }}
                             </div>
                         </div>
@@ -38,9 +38,9 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Data Mapel</h4>
+                                <h4 style="font-weight: bold; color: black; white-space: nowrap;">Data Mapel</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body mt-2">
                                 {{ $total_subjects }}
                             </div>
                         </div>
@@ -54,9 +54,9 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total Guru</h4>
+                                <h4 style="font-weight: bold; color: black; white-space: nowrap;">Total Guru</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body mt-2">
                                 {{ $total_teachers }}
                             </div>
                         </div>
@@ -70,10 +70,26 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total Kelas</h4>
+                                <h4 style="font-weight: bold; color: black; white-space: nowrap;">Total Kelas</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body mt-2">
                                 {{ $total_classes }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
+                    <div class="card card-statistic-1 bg-card-5">
+                        <div class="card-icon" style="background-color: #8D0B41">
+                            <i class="fas fa-school fa-lg" style="color: #ffffff;"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4 style="font-weight: bold; color: black; white-space: nowrap;">Total Materi</h4>
+                            </div>
+                            <div class="card-body mt-2">
+                                100{{-- {{ $total_materi }} --}}
                             </div>
                         </div>
                     </div>
