@@ -41,7 +41,7 @@
                                             @php $no=1; @endphp
                                             @foreach ($students as $student)
                                                 <tr>
-                                                    <td>
+                                                    <td class="text-center">
                                                         {{ $no++ }}
                                                     </td>
                                                     <td>{{ $student->name }}</td>

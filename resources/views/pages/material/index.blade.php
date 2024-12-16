@@ -15,6 +15,45 @@
             <div class="section-header rounded-box">
                 <h1>Data Materi</h1>
             </div>
+            @if ($user->role == 'guru')
+
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card rounded-box">
+                                <div class="card-header">
+                                    <h4>Data Mata Pelajaran Yang Diampu</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table-striped table" id="table-1">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">
+                                                        #
+                                                    </th>
+                                                    <th>Mata Pelajaran</th>
+                                                    <th>Deskripsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php $no=1; @endphp
+                                                @foreach ($subjects as $subject)
+                                                    <tr>
+                                                        <td class="text-center">{{ $no++ }}</td>
+                                                        <td>{{ $subject->name }}</td>
+                                                        <td>{{ $subject->description }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="section-body">
                 <div class="row">
                     <div class="col-12">
@@ -27,7 +66,7 @@
                                         class="fas fa-plus-circle"></i> Tambah
                                     Materi</a>
                                 <div class="table-responsive">
-                                    <table class="table-striped table" id="table-1">
+                                    <table class="table-striped table" id="table-2">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">

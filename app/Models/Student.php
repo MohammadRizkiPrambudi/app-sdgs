@@ -20,5 +20,9 @@ class Student extends Model
     {
         return $this->belongsTo(Classes::class, 'class_id');
     }
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'student_id');
+    }
 
 }

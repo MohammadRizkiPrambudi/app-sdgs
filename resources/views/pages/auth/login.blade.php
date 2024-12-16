@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>SimakBelajar - Login</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('library/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -18,6 +18,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -33,6 +34,9 @@
                         </h4>
                         <p class="text-muted">"Tujuan aplikasi ini adalah menyediakan suara dalam materi untuk membantu
                             siswa yang kesulitan membaca."</p>
+                        @if ($errors->has('loginError'))
+                            <div class="alert alert-danger"> {{ $errors->first('loginError') }} </div>
+                        @endif
                         <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
                             @csrf
                             <div class="form-group">
@@ -42,6 +46,9 @@
                                 <div class="invalid-feedback">
                                     Please fill in your email
                                 </div>
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group">
@@ -53,6 +60,9 @@
                                 <div class="invalid-feedback">
                                     please fill in your password
                                 </div>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group">
@@ -71,10 +81,6 @@
                                     tabindex="4">
                                     Login
                                 </button>
-                            </div>
-
-                            <div class="mt-5 text-center">
-                                Belum punya akun? <a href="{{ url('auth-register') }}">Buat akun baru</a>
                             </div>
                         </form>
 

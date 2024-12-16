@@ -19,13 +19,14 @@ class LoginController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-        if (Auth::attempt($credentials)) {
+
+        $remember = $request->has('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->withErrors(['loginError' => 'Email atau password yang Anda masukkan salah.'])->onlyInput('email');
     }
 
     public function logout(Request $request)

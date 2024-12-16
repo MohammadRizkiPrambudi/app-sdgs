@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Student;
+use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,6 +88,38 @@ class StudentController extends Controller
         $students = $class->students;
         $menustudent = 'active';
         return view('pages.student.show', compact('class', 'students', 'user', 'menustudent'));
+    }
+
+    public function showSubject()
+    {
+        $menusubject = 'active';
+        $user = Auth::user();
+        $student = $user->student;
+        $class = $student->class;
+        if (!$class) {
+            return redirect()->route('dashboard')->with('error', 'Class not found for this student.');
+        }
+        $subjects = $class->subjects;
+        $teacher = $class->teacher;
+        return view('pages.student.showsubject', compact('subjects', 'user', 'menusubject', 'teacher'));
+
+    }
+
+    public function showAssignment()
+    {
+        $user = Auth::user();
+        $student = $user->student;
+        $class = $student->class;
+        if (!$class) {
+            return redirect()->route('dashboard')->with('error', 'Class not found for this student.');
+        }
+        $subjects = $class->subjects;
+        $teacher = $class->teacher;
+        $assignments = $class->assignments;
+        $submissions = Submission::where('student_id', $student->id)->get();
+        $menuassignment = 'active';
+
+        return view('pages.student.showassignment', compact('user', 'menuassignment', 'assignments', 'submissions'));
     }
 
 }

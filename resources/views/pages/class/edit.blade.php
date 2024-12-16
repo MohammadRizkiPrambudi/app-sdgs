@@ -3,6 +3,7 @@
 @section('title', 'Data Kelas')
 
 @push('style')
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 
 @section('main')<div class="main-content">
@@ -46,8 +47,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="subject_id">Mata Pelajaran</label>
-                                                <select class="form-control" id="subjects" name="subjects[]" multiple
-                                                    required>
+                                                <select class="form-control select2" id="subjects" name="subjects[]"
+                                                    multiple required>
                                                     @foreach ($subjects as $subject)
                                                         <option value="{{ $subject->id }}"
                                                             {{ in_array($subject->id, $class->subjects->pluck('id')->toArray()) ? 'selected' : '' }}>
@@ -73,4 +74,5 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 @endpush

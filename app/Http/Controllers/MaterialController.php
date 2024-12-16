@@ -14,18 +14,32 @@ class MaterialController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $materials = Material::all();
+        $teacher = $user->teacher;
+
+        if (!$teacher) {
+            return redirect()->route('dashboard')->with('error', 'Teacher not found.');
+        }
+
+        $materials = Material::whereHas('class', function ($query) use ($teacher) {
+            $query->where('teacher_id', $teacher->id);
+        })->get();
+
+        $subjects = Subject::whereHas('classes', function ($query) use ($teacher) {
+            $query->where('teacher_id', $teacher->id);
+        })->get();
+
         $menumaterial = 'active';
         $title = 'Hapus Materi!';
         $text = "Aapakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.material.index', compact('materials', 'menumaterial', 'user'));
+        return view('pages.material.index', compact('materials', 'menumaterial', 'user', 'subjects'));
     }
 
     public function create()
     {
         $user = Auth::user();
-        $classes = Classes::all();
+        $teacher = $user->teacher;
+        $classes = $teacher->classes;
         $subjects = Subject::all();
         $menumaterial = 'active';
         return view('pages.material.create', compact('classes', 'subjects', 'menumaterial', 'user'));
@@ -39,7 +53,20 @@ class MaterialController extends Controller
             'class_id' => 'required|exists:classes,id',
             'subject_id' => 'required|exists:subjects,id',
         ]);
-        Material::create($request->all());
+        $user = Auth::user();
+        $teacher = $user->teacher;
+        $class = Classes::where('id', $request->class_id)->where('teacher_id', $teacher->id)->first();
+        $subject = Subject::where('id', $request->subject_id)->first();
+        if (!$class) {
+            return redirect()->route('materials.create')->with('error', 'You are not authorized to add materials to this class.');
+        }
+
+        Material::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'class_id' => $class->id,
+            'subject_id' => $subject->id,
+        ]);
         Alert::success('Hore!', 'Materi Berhasil Ditambahkan');
         return redirect()->route('materials.index');
     }
@@ -47,10 +74,13 @@ class MaterialController extends Controller
     public function show(Material $material)
     {
         $user = Auth::user();
+        $menumaterial = 'active';
         if ($user->role == 'admin') {
-            return view('pages.material.showadmin', compact('material', 'user'));
+            return view('pages.material.showadmin', compact('material', 'user', 'menumaterial'));
         } elseif ($user->role == 'siswa') {
-            return view('pages.material.showstudent', compact('material', 'user'));
+            return view('pages.material.showstudent', compact('material', 'user', 'menumaterial'));
+        } elseif ($user->role == 'guru') {
+            return view('pages.material.showadmin', compact('material', 'user', 'menumaterial'));
         } else {
             return redirect('/')->with('error', 'Akses tidak diizinkan.');
         }
@@ -73,7 +103,23 @@ class MaterialController extends Controller
             'class_id' => 'required|exists:classes,id',
             'subject_id' => 'required|exists:subjects,id',
         ]);
-        $material->update($request->all());
+
+        $user = Auth::user();
+        $teacher = $user->teacher;
+        $class = Classes::where('id', $request->class_id)->where('teacher_id', $teacher->id)->first();
+        $subject = Subject::where('id', $request->subject_id)->first();
+
+        if (!$class) {
+            return redirect()->route('materials.edit', $material->id)->with('error', 'You are not authorized to update materials for this class.');
+        }
+
+        $material->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'class_id' => $class->id,
+            'subject_id' => $subject->id,
+        ]);
+
         Alert::success('Hore!', 'Materi Berhasil Diperbarui');
         return redirect()->route('materials.index');
     }

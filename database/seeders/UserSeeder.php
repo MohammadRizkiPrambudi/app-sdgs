@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         User::create(['name' => 'Admin', 'email' => 'admin@example.com', 'role' => 'admin', 'password' => Hash::make('password123')]);
         User::create(['name' => 'Siswa 1', 'email' => 'siswa1@example.com', 'role' => 'siswa', 'password' => Hash::make('password123')]);
-        User::create(['name' => 'Guru Matematika', 'email' => 'guru.mat@example.com', 'role' => 'teacher', 'password' => Hash::make('password123')]);
-        User::create(['name' => 'Guru Bahasa Indonesia', 'email' => 'guru.bahasa@example.com', 'role' => 'teacher', 'password' => Hash::make('password123')]);
+        User::create(['name' => 'Guru Matematika', 'email' => 'guru.mat@example.com', 'role' => 'guru', 'password' => Hash::make('password123')]);
+        User::create(['name' => 'Guru Bahasa Indonesia', 'email' => 'guru.bahasa@example.com', 'role' => 'guru', 'password' => Hash::make('password123')]);
     }
 }

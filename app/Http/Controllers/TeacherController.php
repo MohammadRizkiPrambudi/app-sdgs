@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -77,6 +78,24 @@ class TeacherController extends Controller
         $teacher->delete();
         $user->delete();
         return redirect()->route('teachers.index');
+    }
+
+    public function showClass()
+    {
+        $menuteacher = 'active';
+        $user = Auth::user();
+        $teacher = $user->teacher;
+        $classes = $teacher->classes;
+        return view('pages.teacher.showclass', compact('classes', 'user', 'menuteacher'));
+    }
+
+    public function classStudents($classId)
+    {
+        $menuteacher = 'active';
+        $user = Auth::User();
+        $class = Classes::findOrFail($classId);
+        $students = $class->students;
+        return view('pages.teacher.class-students', compact('class', 'students', 'user', 'menuteacher'));
     }
 
 }

@@ -18,6 +18,12 @@ class Classes extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class, 'class_id');
+    }
+
     public function subjects()
     {
         return $this->belongsToMany(Subject::class, 'class_subject', 'class_id', 'subject_id');

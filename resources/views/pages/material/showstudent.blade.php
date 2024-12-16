@@ -29,7 +29,7 @@
                                 <h2>{{ $material->title }}</h2>
                                 <p>{!! $material->content !!}</p>
                                 <p id="material-content" class="d-none">{{ strip_tags($material->content) }}</p>
-                                <a href="{{ route('student.dashboard') }}" class="btn btn-danger"><i
+                                <a href="{{ route('show.subject') }}" class="btn btn-danger"><i
                                         class="fas fa-arrow-left"></i> Kembali</a>
                             </div>
                         </div>

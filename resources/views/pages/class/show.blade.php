@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 @endpush
 
-@section('main')<div class="main-content">
+@section('main')
+    <div class="main-content">
         <section class="section">
             <div class="section-header">
                 <h1>Data Kelas</h1>
@@ -18,30 +19,107 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Kelas</h4>
+                                <h4>Data Mata Pelajaran</h4>
                             </div>
                             <div class="card-body">
-                                <h1>Detail Kelas</h1>
-                                <h2>{{ $class->name }}</h2>
-                                <p><strong>Guru:</strong> {{ $class->teacher->name }}</p>
-                                <p><strong>Mata Pelajaran:</strong></p>
-                                <ul>
-                                    @foreach ($class->subjects as $subject)
-                                        <li>{{ $subject->name }}</li>
-                                    @endforeach
-                                </ul>
-                                <h3>Daftar Siswa</h3>
-                                <ul>
-                                    @foreach ($class->students as $student)
-                                        <li>{{ $student->name }}</li>
-                                    @endforeach
-                                </ul>
-                                <h3>Materi</h3>
-                                <ul>
-                                    @foreach ($class->materials as $material)
-                                        <li>{{ $material->title }}</li>
-                                    @endforeach
-                                </ul>
+                                <div class="table-responsive">
+                                    <table class="table-striped table" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>Nama</th>
+                                                <th>Deskripsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $no=1; @endphp
+                                            @foreach ($class->subjects as $subject)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        {{ $no++ }}
+                                                    </td>
+                                                    <td>{{ $subject->name }}</td>
+                                                    <td>{{ $subject->description }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Data Siswa</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table-striped table" id="table-2">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>Nama</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $no=1; @endphp
+                                            @foreach ($class->students as $student)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        {{ $no++ }}
+                                                    </td>
+                                                    <td>{{ $student->name }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Data Siswa</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table-striped table" id="table-3">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>Judul</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $no=1; @endphp
+                                            @foreach ($class->materials as $material)
+                                                <tr>
+                                                    <td class="text-center">{{ $no++ }}</td>
+                                                    <td>{{ $material->title }}</td>
+                                                    <td>
+                                                        <a href="{{ route('materials.show', $material->id) }}"
+                                                            class="btn btn-info rounded-box"><i
+                                                                class="fas fa-eye mr-1"></i>Lihat
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

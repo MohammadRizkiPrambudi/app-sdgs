@@ -15,6 +15,11 @@ class Subject extends Model
         return $this->belongsToMany(Classes::class, 'class_subject', 'subject_id', 'class_id');
     }
 
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class, 'subject_id');
+    }
+
     public function materials()
     {
         return $this->hasMany(Material::class, 'subject_id');

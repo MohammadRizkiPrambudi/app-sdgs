@@ -25,8 +25,14 @@
                                 <h2>{{ $material->title }}</h2>
                                 <p>{!! $material->content !!}</p>
                                 <p id="material-content" class="d-none">{{ strip_tags($material->content) }}</p>
-                                <a href="{{ route('materials.index') }}" class="btn btn-danger"><i
-                                        class="fas fa-arrow-left"></i> Kembali</a>
+
+                                @if ($user->role == 'admin')
+                                    <a href="{{ route('classes.show', $material->class->id) }}" class="btn btn-danger"><i
+                                            class="fas fa-arrow-left"></i> Kembali</a>
+                                @else
+                                    <a href="{{ route('materials.index') }}" class="btn btn-danger"><i
+                                            class="fas fa-arrow-left"></i> Kembali</a>
+                                @endif
                             </div>
                         </div>
                     </div>

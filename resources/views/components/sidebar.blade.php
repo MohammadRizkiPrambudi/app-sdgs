@@ -31,12 +31,6 @@
                         <span>Data
                             Guru </span></a>
                 </li>
-                <li class="{{ isset($menumaterial) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('materials.index') }}"><i class="fas fa-book-open"></i>
-                        <span>Data
-                            Materi
-                        </span></a>
-                </li>
                 {{-- Manajemen admin --}}
                 <li class="menu-header">Manajemen user</li>
                 <li class="{{ isset($menuadmin) ? 'active' : '' }}">
@@ -51,8 +45,12 @@
                         <span>Daftar
                             Siswa</span></a>
                 </li>
+                <li class="{{ isset($menusubject) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('show.subject') }}"><i class="far fa-square"></i>
+                        <span>Daftar Mapel</span></a>
+                </li>
                 <li class="{{ isset($menuassignment) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('students.index') }}">
+                    <a class="nav-link" href="{{ route('show.assignment') }}">
                         <i class="fas fa-chalkboard"></i>
                         <span>Penugasan</span>
                     </a>
@@ -63,15 +61,29 @@
                 </li>
             @endif
             @if ($user->role == 'guru')
-                <li class="{{ isset($menustudent) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('students.index') }}"><i class="fas fa-user-graduate"></i>
+                <li class="{{ isset($menuteacher) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('show.class') }}"><i class="fas fa-school"></i>
+                        <span>Data Kelas</span></a>
+                </li>
+                <li class="{{ isset($menumaterial) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('materials.index') }}"><i class="fas fa-book-open"></i>
                         <span>Data
-                            Siswa</span></a>
+                            Materi
+                        </span></a>
+                </li>
+                <li class="{{ isset($menuassignment) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('assignments.index') }}"><i class="fas fa-laptop-file"></i>
+                        <span>Data Tugas</span></a>
+                </li>
+                <li class="{{ isset($menuprofile) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('profile.edit') }}"><i class="fas fa-user-pen"></i>
+                        <span>Profile</span></a>
                 </li>
             @endif
         </ul>
         <div class="hide-sidebar-mini mt-4 mb-4 p-3">
-            <a href="" class="btn btn-primary btn-lg btn-block btn-icon-split">
+            <a href="https://github.com/MohammadRizkiPrambudi/app-sdgs"
+                class="btn btn-primary btn-lg btn-block btn-icon-split" target="blank">
                 <i class="fas fa-rocket"></i> Dokumentasi Penggunaan
             </a>
         </div>
