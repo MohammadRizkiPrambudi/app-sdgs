@@ -89,7 +89,7 @@
                                 <h4 style="font-weight: bold; color: black; white-space: nowrap;">Total Materi</h4>
                             </div>
                             <div class="card-body mt-2">
-                                100{{-- {{ $total_materi }} --}}
+                                {{ $total_materi }}
                             </div>
                         </div>
                     </div>

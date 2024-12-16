@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Classes;
+use App\Models\Material;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Submission;
@@ -88,8 +89,9 @@ class HomeController extends Controller
         $total_teachers = Teacher::count();
         $total_classes = Classes::count();
         $total_subjects = Subject::count();
+        $total_materi = Material::count();
         $menudashboard = 'active';
-        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects', 'user'));
+        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects', 'user', 'total_materi'));
     }
 
 }
