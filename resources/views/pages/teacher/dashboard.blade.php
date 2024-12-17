@@ -141,14 +141,19 @@
                     }
                 }
             });
+
             var ctx2 = document.getElementById('submissionProgressChart').getContext('2d');
+            var labels = submissionProgress.map((_, index) => 'Tugas ' + (index + 1));
+            var data = submissionProgress.map(progress => progress.submitted);
+            var dataNotSubmitted = submissionProgress.map(progress => progress.not_submitted);
             var submissionProgressChart = new Chart(ctx2, {
-                type: 'doughnut',
+                type: 'pie',
                 data: {
                     labels: ['Sudah Mengumpulkan', 'Belum Mengumpulkan'],
                     datasets: [{
-                        data: submissionProgress
-                            .flat(),
+                        data: [data.reduce((a, b) => a + b, 0), dataNotSubmitted.reduce((a, b) =>
+                            a + b, 0
+                        )],
                         backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
                         borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
                         borderWidth: 1

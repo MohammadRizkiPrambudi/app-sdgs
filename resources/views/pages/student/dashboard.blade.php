@@ -99,24 +99,28 @@
             var subjectNames = @json($subjects->pluck('name'));
             var subjectGrades = @json($subjectGrades);
             var submissionProgress = @json($submissionProgress);
+
             var ctx1 = document.getElementById('submissionProgressChart').getContext('2d');
             var submissionProgressChart = new Chart(ctx1, {
-                type: 'bar',
+                type: 'pie',
                 data: {
-                    labels: subjectNames,
-                    // Nama mata pelajaran dari database 
+                    labels: ['Sudah Mengumpulkan', 'Belum Mengumpulkan'],
                     datasets: [{
-                        label: 'Progres Pengumpulan Tugas',
-                        data: submissionProgress,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        data: [submissionProgress.submitted, submissionProgress.not_submitted],
+                        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
                         borderWidth: 1
                     }]
                 },
                 options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Progres Pengumpulan Tugas'
                         }
                     }
                 }

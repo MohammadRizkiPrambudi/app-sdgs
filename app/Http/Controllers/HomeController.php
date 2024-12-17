@@ -39,11 +39,9 @@ class HomeController extends Controller
         $subjects = $class->subjects;
         $teacher = $class->teacher;
         $assignments = $class->assignments;
+        $submissions = Submission::where('student_id', $student->id)->get();
 
-        // Menghitung progres pengumpulan tugas
-        $submissionProgress = $assignments->map(function ($assignment) use ($student) {
-            $submitted = Submission::where('assignment_id', $assignment->id)->where('student_id', $student->id)->exists();return $submitted ? 1 : 0;
-        });
+        $submissionProgress = ['submitted' => $submissions->count(), 'not_submitted' => $assignments->count() - $submissions->count()];
 
         // Menghitung nilai rata-rata per mata pelajaran
         $subjectGrades = $subjects->map(function ($subject) use ($student) {
@@ -57,7 +55,6 @@ class HomeController extends Controller
                 }}
             return $count > 0 ? round($totalGrades / $count) : 0;
         });
-        $submissions = Submission::where('student_id', $student->id)->get();
         $menudashboard = 'active';
         return view('pages.student.dashboard', compact('class', 'subjects', 'teacher', 'user', 'menudashboard', 'assignments', 'submissionProgress', 'subjectGrades', 'submissions'));
     }
@@ -75,9 +72,17 @@ class HomeController extends Controller
             $query->where('teacher_id', $teacher->id);
         })->with('submissions')->get();
 
-        $assignmentGrades = $assignments->map(function ($assignment) {$totalGrades = $assignment->submissions->sum('grade'); $submissionCount = $assignment->submissions->count();return $submissionCount > 0 ? round($totalGrades / $submissionCount) : 0;});
+        $assignmentGrades = $assignments->map(function ($assignment) {
+            $totalGrades = $assignment->submissions->sum('grade');
+            $submissionCount = $assignment->submissions->count();
+            return $submissionCount > 0 ? round($totalGrades / $submissionCount) : 0;
+        });
 
-        $submissionProgress = $assignments->map(function ($assignment) {$submitted = $assignment->submissions->count(); $totalStudents = $assignment->class->students->count();return [$submitted, $totalStudents - $submitted];});
+        $submissionProgress = $assignments->map(function ($assignment) {
+            $submitted = $assignment->submissions->count();
+            $totalStudents = $assignment->class->students->count();
+            return ['submitted' => $submitted, 'not_submitted' => $totalStudents - $submitted];
+        });
 
         return view('pages.teacher.dashboard', compact('classes', 'assignments', 'teacher', 'user', 'assignmentGrades', 'submissionProgress', 'menudashboard'));
     }
@@ -91,7 +96,44 @@ class HomeController extends Controller
         $total_subjects = Subject::count();
         $total_materi = Material::count();
         $menudashboard = 'active';
-        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects', 'user', 'total_materi'));
+
+        $assignments = Assignment::with('submissions')->get();
+        $classes = Classes::with('students')->get();
+        $subjects = Subject::all();
+
+        // Menghitung nilai rata-rata per tugas
+        $assignmentGrades = $assignments->map(function ($assignment) {
+            $totalGrades = $assignment->submissions->sum('grade');
+            $submissionCount = $assignment->submissions->count();
+            return $submissionCount > 0 ? round($totalGrades / $submissionCount) : 0;
+        });
+        // Menghitung progres pengumpulan tugas
+        $submissionProgress = $assignments->map(function ($assignment) {
+            $submitted = $assignment->submissions->count();
+            $totalStudents = $assignment->class->students->count();
+            return ['submitted' => $submitted, 'not_submitted' => $totalStudents - $submitted];
+        });
+
+        // Menghitung distribusi nilai tugas siswa
+        $gradeDistribution = $assignments->map(function ($assignment) {
+            return $assignment->submissions->groupBy('grade')->map(function ($submissions) {
+                return $submissions->count();
+            });
+        });
+
+        // Menghitung rata-rata nilai per mata pelajaran
+        $subjectGrades = $subjects->map(function ($subject) {
+            $assignments = $subject->assignments;
+            $totalGrades = 0;
+            $count = 0;
+            foreach ($assignments as $assignment) {
+                $totalGrades += $assignment->submissions->sum('grade');
+                $count += $assignment->submissions->count();
+            }
+            return $count > 0 ? round($totalGrades / $count) : 0;
+        });
+
+        return view('pages.user.dashboard', compact('total_students', 'total_teachers', 'total_classes', 'menudashboard', 'total_subjects', 'user', 'total_materi', 'assignments', 'classes', 'assignmentGrades', 'submissionProgress', 'gradeDistribution', 'subjectGrades', 'subjects'));
     }
 
 }
