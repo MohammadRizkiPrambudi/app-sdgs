@@ -35,11 +35,11 @@
                                                     <th class="text-center">
                                                         #
                                                     </th>
-                                                    <th>Judul</th>
-                                                    <th>Deskripsi</th>
-                                                    <th>Kelas</th>
-                                                    <th>Mata Pelajaran</th>
-                                                    <th>Aksi</th>
+                                                    <th class="text-center">Judul</th>
+                                                    <th class="text-center">Deskripsi</th>
+                                                    <th class="text-center">Kelas</th>
+                                                    <th class="text-center">Mata Pelajaran</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -47,13 +47,13 @@
                                                 @foreach ($assignments as $assignment)
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $assignment->title }}</td>
-                                                        <td>{{ $assignment->description }}</td>
-                                                        <td>{{ $assignment->class->name }}</td>
-                                                        <td>{{ $assignment->subject->name }}</td>
-                                                        <td>
+                                                        <td class="text-center">{{ $assignment->title }}</td>
+                                                        <td class="text-center">{{ $assignment->description }}</td>
+                                                        <td class="text-center">{{ $assignment->class->name }}</td>
+                                                        <td class="text-center">{{ $assignment->subject->name }}</td>
+                                                        <td class="text-center">
                                                             <a href="{{ route('assignments.edit', $assignment->id) }}"
-                                                                class="btn btn-warning"><i
+                                                                class="btn btn-sm btn-warning"><i
                                                                     class="fas fa-edit mr-1"></i>Edit</a>
                                                         </td>
                                                     </tr>

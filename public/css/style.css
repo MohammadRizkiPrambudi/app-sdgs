@@ -1618,6 +1618,7 @@ h6 .badge {
 .btn.btn-lg {
     padding: 0.55rem 1.5rem;
     font-size: 12px;
+    margin-left: -12px;
 }
 .btn.btn-lg.btn-icon-split i {
     line-height: 42px;
@@ -3325,7 +3326,7 @@ pre {
     top: 0;
     height: 100%;
     width: 250px;
-    background-color: #fff;
+    background-color: #031F31;
     z-index: 880;
     left: 0;
 }
@@ -3788,7 +3789,7 @@ body.layout-3 .main-footer {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 700;
-    color: #000;
+    color: #ffffff;
 }
 .main-sidebar .sidebar-user {
     display: inline-block;
@@ -3830,7 +3831,7 @@ body.layout-3 .main-footer {
     padding: 0 20px;
     width: 100%;
     letter-spacing: 0.3px;
-    color: #78828a;
+    color: #ffffff;
     text-decoration: none;
 }
 .main-sidebar .sidebar-menu li a .badge {
@@ -3848,10 +3849,14 @@ body.layout-3 .main-footer {
     width: 100%;
 }
 .main-sidebar .sidebar-menu li a:hover {
-    background-color: #f8fafb;
+    background-color: #85A98F;
+    border-radius: 10px;
+    width: 90%;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 .main-sidebar .sidebar-menu li.active a {
-    color: #85a98f;
+    color: #ffffff;
     font-weight: 600;
     background-color: #f8fafb;
 }
@@ -3859,7 +3864,7 @@ body.layout-3 .main-footer {
     transform: translate(0, -50%) rotate(90deg);
 }
 .main-sidebar .sidebar-menu li.active ul.dropdown-menu {
-    background-color: #f8fafb;
+    background-color: #ffffff;
 }
 .main-sidebar .sidebar-menu li a.has-dropdown:after {
     content: "\f054";
@@ -3970,9 +3975,13 @@ body:not(.sidebar-mini)
 }
 
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a {
-    padding-left: 16px;
-    background-color: transparent;
+    /* padding-left: 16px; */
+    padding: 0.55rem 1.5rem;
+    background-color: #85A98F;
+    /* margin-left: 14px; */
+    width: 90%;
     position: relative;
+    border-radius: 10px;
 }
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a:before {
     content: "";

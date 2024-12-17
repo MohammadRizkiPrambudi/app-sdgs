@@ -13,24 +13,25 @@
             </li>
             @if ($user->role == 'admin')
                 <li class="menu-header">Manajemen Data</li>
-                <li class="{{ isset($menuclass) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('classes.index') }}"><i class="fas fa-school"></i> <span>Data
-                            Kelas</span></a>
+                <li class="{{ isset($menuteacher) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('teachers.index') }}"><i class="fas fa-chalkboard-user"></i>
+                        <span>Data
+                            Guru </span></a>
                 </li>
                 <li class="{{ isset($menusubject) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('subjects.index') }}"><i class="far fa-square"></i> <span>Data
                             Mapel</span></a>
+                </li>
+                <li class="{{ isset($menuclass) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('classes.index') }}"><i class="fas fa-school"></i> <span>Data
+                            Kelas</span></a>
                 </li>
                 <li class="{{ isset($menustudent) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('students.index') }}"><i class="fas fa-user-graduate"></i>
                         <span>Data
                             Siswa</span></a>
                 </li>
-                <li class="{{ isset($menuteacher) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('teachers.index') }}"><i class="fas fa-chalkboard-user"></i>
-                        <span>Data
-                            Guru </span></a>
-                </li>
+
                 {{-- Manajemen admin --}}
                 <li class="menu-header">Manajemen user</li>
                 <li class="{{ isset($menuadmin) ? 'active' : '' }}">

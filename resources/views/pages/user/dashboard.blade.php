@@ -12,8 +12,16 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Dashboard</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="col-12">
+                        <p style="color: #6777ef; font-size: larger">Hallo Selamat Datang {{ $user->name }} 😁</p>
+                    </div>
+                </div>
             </div>
+            {{-- <h5>Hallo Selamat Datang {{ $user->name }} 😁</h5> --}}
             <div class="row d-flex flex-wrap justify-content-between custom-row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 p-10">
                     <div class="card card-statistic-1 bg-card-1">
@@ -100,7 +108,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Statistik</h4>
+                            <h4>Grafik Rata-rata Nilai</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="assignmentGradesChart"></canvas>
@@ -110,7 +118,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Statistik</h4>
+                            <h4>Grafik Progres Pengumpulan Tugas</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="submissionProgressChart"></canvas>
@@ -120,7 +128,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Statistik</h4>
+                            <h4>Grafik Distribusi Nilai</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="gradeDistributionChart"></canvas>

@@ -25,7 +25,7 @@
                                         <li class="list-group-item">{{ $student->name }}</li>
                                     @endforeach
                                 </ul>
-                                <a href="{{ route('show.class') }}" class="btn btn-danger mt-2"><i
+                                <a href="{{ route('show.class') }}" class="btn btn-sm btn-danger mt-2"><i
                                         class="fas fa-arrow-left mr-1"></i>Kembali</a>
                             </div>
                         </div>

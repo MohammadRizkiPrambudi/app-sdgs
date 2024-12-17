@@ -14,7 +14,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Dashboard</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="col-12">
+                        <p style="color: #6777ef; font-size: larger">Hallo Selamat Datang {{ $user->name }} 😁</p>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6">
@@ -59,10 +66,10 @@
                                                     <th class="text-center">
                                                         #
                                                     </th>
-                                                    <th>Nama Siswa</th>
-                                                    <th>File Tugas</th>
-                                                    <th>Nilai</th>
-                                                    <th>Aksi</th>
+                                                    <th class="text-center">Nama Siswa</th>
+                                                    <th class="text-center">File Tugas</th>
+                                                    <th class="text-center">Nilai</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -72,13 +79,13 @@
                                                 @foreach ($assignment->submissions as $submission)
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $submission->student->name }}</td>
-                                                        <td>
+                                                        <td class="text-center">{{ $submission->student->name }}</td>
+                                                        <td class="text-center">
                                                             <a href="{{ route('submissions.download', $submission->id) }}"
                                                                 class="btn btn-primary btn-sm"><i
                                                                     class="fas fa-download mr-1"></i>Download</a>
                                                         </td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             {{ $submission->grade ?? 'Belum dinilai' }}</td>
                                                         <td>
                                                             <form action="{{ route('submissions.grade', $submission->id) }}"

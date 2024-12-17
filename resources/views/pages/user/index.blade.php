@@ -31,10 +31,10 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>Nama</th>
-                                                <th>Email</th>
-                                                <th>Peran</th>
-                                                <th>Aksi</th>
+                                                <th class="text-center">Nama</th>
+                                                <th class="text-center">Email</th>
+                                                <th class="text-center">Peran</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -42,14 +42,14 @@
                                             @foreach ($users as $user)
                                                 <tr>
                                                     <td class="text-center">{{ $no++ }}</td>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->email }}</td>
-                                                    <td>{{ $user->role }}</td>
-                                                    <td>
+                                                    <td class="text-center">{{ $user->name }}</td>
+                                                    <td class="text-center">{{ $user->email }}</td>
+                                                    <td class="text-center">{{ $user->role }}</td>
+                                                    <td class="text-center">
                                                         <a href="{{ route('users.edit', $user->id) }}"
-                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                                            class="btn btn-sm btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('users.destroy', $user->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                            class="btn btn-sm btn-danger" data-confirm-delete="true"><i
                                                                 class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>

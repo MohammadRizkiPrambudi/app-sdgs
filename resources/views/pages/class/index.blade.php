@@ -31,9 +31,9 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>Kelas</th>
-                                                <th>Kelas</th>
-                                                <th>Aksi</th>
+                                                <th class="text-center">Kelas</th>
+                                                <th class="text-center">Kelas</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -43,16 +43,16 @@
                                                     <td class="text-center">
                                                         {{ $no++ }}
                                                     </td>
-                                                    <td>{{ $class->name }}</td>
-                                                    <td>{{ $class->name }}</td>
-                                                    <td>
+                                                    <td class="text-center">{{ $class->name }}</td>
+                                                    <td class="text-center">{{ $class->name }}</td>
+                                                    <td class="text-center">
                                                         <a href="{{ route('classes.show', $class->id) }}"
-                                                            class="btn btn-info"><i class="fas fa-eye mr-1"></i>Lihat</a>
+                                                            class="btn btn-sm btn-info"><i class="fas fa-eye mr-1"></i>Lihat</a>
                                                         <a href="{{ route('classes.edit', $class->id) }}"
-                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>
+                                                            class="btn btn-sm btn-warning"><i class="fas fa-edit mr-1"></i>
                                                             Edit</a>
                                                         <a href="{{ route('classes.destroy', $class->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                            class="btn btn-sm btn-danger" data-confirm-delete="true"><i
                                                                 class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>

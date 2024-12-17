@@ -31,25 +31,25 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>Guru</th>
-                                                <th>Email</th>
-                                                <th>Aksi</th>
+                                                <th class="text-center">Guru</th>
+                                                <th class="text-center">Email</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php $no=1; @endphp
                                             @foreach ($teachers as $teacher)
                                                 <tr>
-                                                    <td>
+                                                    <td class="text-center">
                                                         {{ $no++ }}
                                                     </td>
-                                                    <td>{{ $teacher->name }}</td>
-                                                    <td>{{ $teacher->user->email }}</td>
-                                                    <td>
+                                                    <td class="text-center">{{ $teacher->name }}</td>
+                                                    <td class="text-center">{{ $teacher->user->email }}</td>
+                                                    <td class="text-center">
                                                         <a href="{{ route('teachers.edit', $teacher->id) }}"
-                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                                            class="btn btn-sm btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('teachers.destroy', $teacher->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                            class="btn btn-sm btn-danger" data-confirm-delete="true"><i
                                                                 class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>

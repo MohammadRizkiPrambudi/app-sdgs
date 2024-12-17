@@ -32,8 +32,8 @@
                                                     <th class="text-center">
                                                         #
                                                     </th>
-                                                    <th>Mata Pelajaran</th>
-                                                    <th>Deskripsi</th>
+                                                    <th class="text-center">Mata Pelajaran</th>
+                                                    <th class="text-center">Deskripsi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -41,8 +41,8 @@
                                                 @foreach ($subjects as $subject)
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $subject->name }}</td>
-                                                        <td>{{ $subject->description }}</td>
+                                                        <td class="text-center">{{ $subject->name }}</td>
+                                                        <td class="text-center">{{ $subject->description }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -72,9 +72,9 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>Judul</th>
-                                                <th>Kelas</th>
-                                                <th>Aksi</th>
+                                                <th class="text-center">Judul</th>
+                                                <th class="text-center">Kelas</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,17 +82,17 @@
                                             @foreach ($materials as $material)
                                                 <tr>
                                                     <td class="text-center">{{ $no++ }}</td>
-                                                    <td>{{ $material->title }}</td>
-                                                    <td>{{ $material->class->name }}</td>
-                                                    <td>
+                                                    <td class="text-center">{{ $material->title }}</td>
+                                                    <td class="text-center">{{ $material->class->name }}</td>
+                                                    <td class="text-center">
                                                         <a href="{{ route('materials.show', $material->id) }}"
-                                                            class="btn btn-info rounded-box"><i
+                                                            class="btn btn-sm btn-info rounded-box"><i
                                                                 class="fas fa-eye mr-1"></i>Lihat</a> <a
                                                             href="{{ route('materials.edit', $material->id) }}"
-                                                            class="btn btn-warning rounded-box"><i
+                                                            class="btn btn-sm btn-warning rounded-box"><i
                                                                 class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('materials.destroy', $material->id) }}"
-                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                            class="btn btn-sm btn-danger" data-confirm-delete="true"><i
                                                                 class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>

@@ -6,9 +6,9 @@
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
                         class="fas fa-search"></i></a></li>
         </ul>
-        <div class="search-element rounded-box">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
-            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        <div class="search-element">
+            <input class="form-control" style="border-radius: 15px 15px 15px 15px;" type="search" placeholder="Search" aria-label="Search" data-width="200">
+            <button class="btn" style="border-radius: 15px" type="submit"><i class="fas fa-search"></i></button>
             <div class="search-backdrop"></div>
         </div>
     </form>
