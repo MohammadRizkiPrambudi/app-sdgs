@@ -58,7 +58,7 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary"><i
                                             class="fas fa-save mr-1"></i>Simpan</button>
-                                    <a href="{{ route('teachers.index') }}" class="btn btn-danger"><i
+                                    <a href="{{ route('users.index') }}" class="btn btn-danger"><i
                                             class="fas fa-arrow-left"></i>
                                         Kembali</a>
                                 </form>

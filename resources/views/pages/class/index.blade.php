@@ -32,7 +32,6 @@
                                                     #
                                                 </th>
                                                 <th class="text-center">Kelas</th>
-                                                <th class="text-center">Kelas</th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
@@ -44,10 +43,10 @@
                                                         {{ $no++ }}
                                                     </td>
                                                     <td class="text-center">{{ $class->name }}</td>
-                                                    <td class="text-center">{{ $class->name }}</td>
                                                     <td class="text-center">
                                                         <a href="{{ route('classes.show', $class->id) }}"
-                                                            class="btn btn-sm btn-info"><i class="fas fa-eye mr-1"></i>Lihat</a>
+                                                            class="btn btn-sm btn-info"><i
+                                                                class="fas fa-eye mr-1"></i>Lihat</a>
                                                         <a href="{{ route('classes.edit', $class->id) }}"
                                                             class="btn btn-sm btn-warning"><i class="fas fa-edit mr-1"></i>
                                                             Edit</a>

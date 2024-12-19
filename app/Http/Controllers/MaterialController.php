@@ -75,10 +75,11 @@ class MaterialController extends Controller
     {
         $user = Auth::user();
         $menumaterial = 'active';
+        $menusubject = 'active';
         if ($user->role == 'admin') {
             return view('pages.material.showadmin', compact('material', 'user', 'menumaterial'));
         } elseif ($user->role == 'siswa') {
-            return view('pages.material.showstudent', compact('material', 'user', 'menumaterial'));
+            return view('pages.material.showstudent', compact('material', 'user', 'menusubject'));
         } elseif ($user->role == 'guru') {
             return view('pages.material.showadmin', compact('material', 'user', 'menumaterial'));
         } else {
