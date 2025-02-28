@@ -31,7 +31,12 @@
                         <span>Data
                             Siswa</span></a>
                 </li>
-
+                {{-- Manajemen ujian --}}
+                <li class="menu-header">Manajemen Ujian</li>
+                <li class="{{ isset($menuujian) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('exams.index') }}"><i class="fas fa-edit"></i> <span>Data Ujian
+                        </span></a>
+                </li>
                 {{-- Manajemen admin --}}
                 <li class="menu-header">Manajemen user</li>
                 <li class="{{ isset($menuadmin) ? 'active' : '' }}">

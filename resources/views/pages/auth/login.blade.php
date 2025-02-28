@@ -27,7 +27,7 @@
             <div class="d-flex align-items-stretch flex-wrap">
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
                     <div class="m-3 p-4">
-                        <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="80"
+                        <img src="{{ asset('img/logo.png') }}" alt="logo" width="80"
                             class="shadow-light rounded-circle mb-5 mt-2">
                         <h4 class="text-dark font-weight-normal">Selamat Datang <span
                                 class="font-weight-bold">SimakBelajar</span>
@@ -73,10 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group text-right">
-                                <a href="auth-forgot-password.html" class="float-left mt-3">
-                                    Forgot Password?
-                                </a>
+                            <div class="form-group">
                                 <button type="submit" class="rounded-box btn btn-primary btn-lg btn-icon icon-right"
                                     tabindex="4">
                                     Login
