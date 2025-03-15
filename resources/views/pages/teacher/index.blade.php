@@ -17,13 +17,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Data Guru</h4>
-                            </div>
                             <div class="card-body">
                                 <a href="{{ route('teachers.create') }}" class="btn btn-primary mb-3"><i
-                                        class="fas fa-plus-circle"></i> Tambah
-                                    Guru</a>
+                                        class="fas fa-plus-circle"></i> Tambah Guru</a>
                                 <div class="table-responsive">
                                     <table class="table-striped table" id="table-1">
                                         <thead>
@@ -47,9 +43,9 @@
                                                     <td class="text-center">{{ $teacher->user->email }}</td>
                                                     <td class="text-center">
                                                         <a href="{{ route('teachers.edit', $teacher->id) }}"
-                                                            class="btn btn-sm btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                                            class="btn btn-warning"><i class="fas fa-edit mr-1"></i>Edit</a>
                                                         <a href="{{ route('teachers.destroy', $teacher->id) }}"
-                                                            class="btn btn-sm btn-danger" data-confirm-delete="true"><i
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
                                                                 class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>

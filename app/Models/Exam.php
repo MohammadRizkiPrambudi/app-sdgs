@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,5 +18,16 @@ class Exam extends Model
     public function studentAnswers()
     {
         return $this->hasMany(StudentAnswer::class);
+    }
+
+    // Relasi ke tabel classes
+    public function class ()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 }

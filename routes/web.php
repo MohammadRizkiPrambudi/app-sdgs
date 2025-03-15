@@ -63,6 +63,12 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::get('/student/assignment', [StudentController::class, 'showAssignment'])->name('show.assignment');
     Route::get('assignments/{assignment}/submit', [SubmissionController::class, 'create'])->name('submissions.create');
     Route::post('assignments/{assignment}/submit', [SubmissionController::class, 'store'])->name('submissions.store');
+    Route::get('/student/exams', [ExamController::class, 'examStudents'])->name('exams.test');
+    Route::post('/exams/{exam}/start', [ExamController::class, 'examStudentStart'])->name('exams.start');
+    Route::get('/exams/{exam}/start', [ExamController::class, 'examStudentStart'])->name('exams.start');
+    Route::post('/exams/{exam}/submit', [ExamController::class, 'submit'])->name('exams.submit');
+    Route::get('/exams/{exam}/result', [ExamController::class, 'result'])->name('exams.result');
+
 });
 
 Route::get('/tes', function () {

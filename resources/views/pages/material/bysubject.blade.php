@@ -1,41 +1,65 @@
 @extends('layouts.app')
 
-
 @section('title', 'Data Materi')
 
 @push('style')
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <style>
+        .rounded-box {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .list-group-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        .list-group-item i {
+            color: #4e73df;
+        }
+
+        .alert {
+            text-align: center;
+        }
+    </style>
 @endpush
 
-@section('main')<div class="main-content">
+@section('main')
+    <div class="main-content">
         <section class="section">
             <div class="section-header rounded-box">
-                <h1>Data Materi</h1>
+                <h1>Materi {{ $subjectname }}</h1>
             </div>
             <div class="section-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card rounded-box">
-                            <div class="card-header">
-                                <h4>Daftar Materi </h4>
-                            </div>
+                        <div class="card rounded-box shadow">
                             <div class="card-body">
                                 @if ($materials->isEmpty())
                                     <div class="alert alert-info">
-                                        Belum ada materi
+                                        <i class="fas fa-info-circle"></i> Belum ada materi yang tersedia.
                                     </div>
                                 @else
-                                    @foreach ($materials as $material)
-                                        <div class="list-group">
+                                    <div class="list-group">
+                                        @foreach ($materials as $material)
                                             <a href="{{ route('materials.show', $material->id) }}"
-                                                class="list-group-item list-group-item-action">{{ $material->title }}</a>
-                                        </div>
-                                    @endforeach
+                                                class="list-group-item list-group-item-action">
+                                                <i class="fas fa-file-alt"></i> {{ $material->title }}
+                                            </a>
+                                        @endforeach
+                                    </div>
                                 @endif
-                                <a href="{{ route('show.subject') }}" class="btn btn-danger mt-2"><i
-                                        class="fas fa-arrow-left mr-1"></i> Kembali</a>
+                                <a href="{{ route('show.subject') }}" class="btn btn-danger mt-3">
+                                    <i class="fas fa-arrow-left"></i> Kembali
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -46,10 +70,4 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 @endpush

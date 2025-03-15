@@ -3,11 +3,17 @@
 @section('title', 'Dashboard Siswa')
 
 @push('style')
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/jqvmap/dist/jqvmap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -15,74 +21,67 @@
         <section class="section">
             <div class="section-header">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <h1>Dashboard</h1>
                     </div>
-                    <div class="col-12">
-                        <p style="color: #6777ef; font-size: larger">Hallo Selamat Datang {{ $user->name }} 😁</p>
+                    <div class="col-md-12 mt-2">
+                        <p style="color: #375a7f; font-size: larger; font-weight: 500;">
+                            Hai, {{ $user->name }}! Selamat belajar dan semangat menyelesaikan tugas. 😁
+                        </p>
                     </div>
                 </div>
             </div>
-
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-6">
+                <div class="col-12 col-md-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Statistik Pengumpulan Tugas</h4>
-                        </div>
+                        <div class="card-header">Grafik Pengumpulan Tugas</div>
                         <div class="card-body">
                             <canvas id="submissionProgressChart"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-6">
+                <div class="col-12 col-md-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Statistik Rata-rata Nilai</h4>
-                        </div>
+                        <div class="card-header">Grafik Rata-rata Nilai</div>
                         <div class="card-body">
                             <canvas id="subjectGradesChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="card">
-                <div class="card-header">
-                    <h4>Daftar tugas</h4>
-                </div>
+                <div class="card-header">Daftar Tugas Terbaru</div>
                 <div class="card-body">
                     @if ($assignments->isEmpty())
-                        <div class="alert alert-info">
-                            Belum ada tugas
-                        </div>
+                        <div class="alert alert-info">Belum ada tugas</div>
                     @else
-                        <div class="list-group">
+                        <ul class="list-group">
                             @foreach ($assignments as $assignment)
                                 @php
                                     $submission = $submissions->where('assignment_id', $assignment->id)->first();
                                 @endphp
-                                <span class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">Tugas {{ $assignment->subject->name }}</h5>
-                                        <small>Tenggat waktu : {{ $assignment->due_date ?? 'Tidak Diketahui' }}</small>
-                                    </div>
-                                    <p class="mb-1">{{ $assignment->description }}</p>
-                                    @if ($submission)
-                                        @if ($submission->grade !== null)
-                                            <p><strong>Nilai:</strong> {{ $submission->grade }}</p>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5>Tugas {{ $assignment->subject->name }}</h5>
+                                        <small>Tenggat: {{ $assignment->due_date ?? 'Tidak Diketahui' }}</small>
+                                        <p>{{ $assignment->description }}</p>
+                                        @if ($submission)
+                                            @if ($submission->grade !== null)
+                                                <span class="badge badge-success px-3 py-2"><i
+                                                        class="fas fa-check-circle"></i> Nilai:
+                                                    {{ $submission->grade }}</span>
+                                            @else
+                                                <span class="badge badge-warning px-3 py-2"><i
+                                                        class="fas fa-hourglass-half"></i> Menunggu Penilaian</span>
+                                            @endif
                                         @else
-                                            <p class="text-danger"><strong>Status:</strong> Sudah diunggah, menunggu
-                                                penilaian</p>
+                                            <a href="{{ route('submissions.create', $assignment->id) }}"
+                                                class="btn btn-primary btn-sm">Unggah Tugas</a>
                                         @endif
-                                    @else
-                                        <a href="{{ route('submissions.create', $assignment->id) }}"
-                                            class="btn btn-primary"><i class="fas fa-upload mr-1"></i>Unggah
-                                            Tugas</a>
-                                    @endif
-                                </span>
+                                    </div>
+                                </li>
                             @endforeach
-                        </div>
+                        </ul>
                     @endif
                 </div>
             </div>
@@ -91,16 +90,8 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/simpleweather/jquery.simpleWeather.min.js') }}"></script>
+    <!-- JS Libraries -->
     <script src="{{ asset('library/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('library/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('library/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('library/summernote/dist/summernote-bs4.min.js') }}"></script>
-    <script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
-    <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('js/page/index-0.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var subjectNames = @json($subjects->pluck('name'));
@@ -108,22 +99,20 @@
             var submissionProgress = @json($submissionProgress);
 
             var ctx1 = document.getElementById('submissionProgressChart').getContext('2d');
-            var submissionProgressChart = new Chart(ctx1, {
+            new Chart(ctx1, {
                 type: 'pie',
                 data: {
                     labels: ['Sudah Mengumpulkan', 'Belum Mengumpulkan'],
                     datasets: [{
                         data: [submissionProgress.submitted, submissionProgress.not_submitted],
-                        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
-                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-                        borderWidth: 1
+                        backgroundColor: ['#4CAF50', '#F44336'],
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         legend: {
-                            position: 'top',
+                            position: 'top'
                         },
                         title: {
                             display: true,
@@ -134,16 +123,15 @@
             });
 
             var ctx2 = document.getElementById('subjectGradesChart').getContext('2d');
-            var subjectGradesChart = new Chart(ctx2, {
+            new Chart(ctx2, {
                 type: 'bar',
                 data: {
                     labels: subjectNames,
                     datasets: [{
                         label: 'Nilai Rata-rata',
                         data: subjectGrades,
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgba(54, 162, 235, 1)'
                     }]
                 },
                 options: {

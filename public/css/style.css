@@ -2145,7 +2145,9 @@ h6 .badge {
     left: 0;
     width: 100%;
     height: 115px;
-    background-color: #85a98f;
+    /* background-color: #85a98f; */
+    background: linear-gradient(90deg, #283593, #1e88e5);
+    /* background: linear-gradient(90deg, #4a148c, #1e88e5); */
     z-index: -1;
 }
 
@@ -3326,7 +3328,8 @@ pre {
     top: 0;
     height: 100%;
     width: 250px;
-    background-color: #031F31;
+    transition: all 0.3s ease-in-out;
+    background-color: #031f31;
     z-index: 880;
     left: 0;
 }
@@ -3355,7 +3358,7 @@ body.sidebar-mini .main-sidebar:after {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
     content: " ";
     position: fixed;
-    background-color: #fff;
+    background-color: #031f31;
     width: 65px;
     height: 100%;
     left: 0;
@@ -3849,7 +3852,7 @@ body.layout-3 .main-footer {
     width: 100%;
 }
 .main-sidebar .sidebar-menu li a:hover {
-    background-color: #85A98F;
+    background: linear-gradient(90deg, #283593, #1e88e5);
     border-radius: 10px;
     width: 90%;
     margin-top: 2px;
@@ -3858,7 +3861,7 @@ body.layout-3 .main-footer {
 .main-sidebar .sidebar-menu li.active a {
     color: #ffffff;
     font-weight: 600;
-    background-color: #f8fafb;
+    background: linear-gradient(90deg, #283593, #1e88e5);
 }
 .main-sidebar .sidebar-menu li.active a.has-dropdown:after {
     transform: translate(0, -50%) rotate(90deg);
@@ -3977,7 +3980,7 @@ body:not(.sidebar-mini)
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a {
     /* padding-left: 16px; */
     padding: 0.55rem 1.5rem;
-    background-color: #85A98F;
+    background-color: #85a98f;
     /* margin-left: 14px; */
     width: 90%;
     position: relative;

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Mata Pelajaran')
+@section('title', 'Data Siswa')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,19 +11,16 @@
 @section('main')<div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Peserta Didik</h1>
+                <h1>Data Siswa</h1>
             </div>
             <div class="section-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Data Peserta Didik</h4>
-                            </div>
                             <div class="card-body">
                                 <a href="{{ route('students.create') }}" class="btn btn-primary mb-3"><i
                                         class="fas fa-plus-circle"></i> Tambah
-                                    Peserta Didik</a>
+                                    Siswa</a>
                                 <div class="table-responsive">
                                     <table class="table-striped table" id="table-1">
                                         <thead>
@@ -49,9 +46,9 @@
                                                     <td class="text-center">{{ $student->class->name }}</td>
                                                     <td class="text-center">
                                                         <a href="{{ route('students.edit', $student->id) }}"
-                                                            class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Edit</a>
+                                                            class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
                                                         <a href="{{ route('students.destroy', $student->id) }}"
-                                                            class="btn btn-sm btn-danger" data-confirm-delete="true"><i
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
                                                                 class="fas fa-trash mr-1"></i>Hapus</a>
                                                     </td>
                                                 </tr>

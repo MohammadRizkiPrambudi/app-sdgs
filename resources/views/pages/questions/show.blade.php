@@ -12,43 +12,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data {{ $class->name }}</h1>
+                <h1>Data Kelas</h1>
             </div>
             <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Data Siswa</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table-striped table" id="table-2">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">
-                                                    #
-                                                </th>
-                                                <th>Nama</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($class->students as $index => $student)
-                                                <tr>
-                                                    <td class="text-center">
-                                                        {{ $index + 1 }}
-                                                    </td>
-                                                    <td>{{ $student->name }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -68,10 +34,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($class->subjects as $index => $subject)
+                                            @php $no=1; @endphp
+                                            @foreach ($class->subjects as $subject)
                                                 <tr>
                                                     <td class="text-center">
-                                                        {{ $index + 1 }}
+                                                        {{ $no++ }}
                                                     </td>
                                                     <td>{{ $subject->name }}</td>
                                                     <td>{{ $subject->description }}</td>
@@ -84,7 +51,40 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Data Siswa</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table-striped table" id="table-2">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>Nama</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $no=1; @endphp
+                                            @foreach ($class->students as $student)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        {{ $no++ }}
+                                                    </td>
+                                                    <td>{{ $student->name }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -104,14 +104,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($class->materials as $index => $material)
+                                            @php $no=1; @endphp
+                                            @foreach ($class->materials as $material)
                                                 <tr>
-                                                    <td class="text-center">{{ $index + 1 }}</td>
+                                                    <td class="text-center">{{ $no++ }}</td>
                                                     <td>{{ $material->title }}</td>
                                                     <td>
                                                         <a href="{{ route('materials.show', $material->id) }}"
                                                             class="btn btn-info rounded-box"><i
-                                                                class="fas fa-eye mr-1"></i>Lihat Materi
+                                                                class="fas fa-eye mr-1"></i>Lihat
                                                         </a>
                                                     </td>
                                                 </tr>

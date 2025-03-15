@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Peserta Didik')
+@section('title', 'Perbarui Data Siswa')
 
 @push('style')
 @endpush
@@ -8,15 +8,12 @@
 @section('main')<div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Peserta Didik</h1>
+                <h1>Perbarui Data Siswa</h1>
             </div>
             <div class="section-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Perbarui Data Peserta Didik</h4>
-                            </div>
                             <div class="card-body">
                                 <form action="{{ route('students.update', $student->id) }}" method="post">
                                     @csrf

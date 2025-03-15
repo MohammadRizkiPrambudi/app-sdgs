@@ -7,7 +7,8 @@
                         class="fas fa-search"></i></a></li>
         </ul>
         <div class="search-element">
-            <input class="form-control" style="border-radius: 15px 15px 15px 15px;" type="search" placeholder="Search" aria-label="Search" data-width="200">
+            <input class="form-control" style="border-radius: 15px 15px 15px 15px;" type="search" placeholder="Search"
+                aria-label="Search" data-width="200">
             <button class="btn" style="border-radius: 15px" type="submit"><i class="fas fa-search"></i></button>
             <div class="search-backdrop"></div>
         </div>

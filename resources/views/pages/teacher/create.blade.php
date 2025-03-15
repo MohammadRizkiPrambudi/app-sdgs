@@ -1,49 +1,46 @@
 @extends('layouts.app')
 
-@section('title', 'Data Guru')
+@section('title', 'Tambah Data Guru')
 
 @push('style')
-    <!-- CSS Libraries -->
 @endpush
 
 @section('main')<div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Guru</h1>
+                <h1>Tambah Data Guru</h1>
             </div>
             <div class="section-body">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Tambah Data Guru</h4>
-                            </div>
                             <div class="card-body">
                                 <form action="{{ route('teachers.store') }}" method="post">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="name">Nama</label>
                                                 <input type="text" class="form-control" id="name" name="name"
-                                                    required>
+                                                    required placeholder="Masukkan Nama Guru">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email"
-                                                    required>
+                                                    required placeholder="Masukkan Email Valid">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="password">Kata Sandi</label> <input type="password"
-                                                    class="form-control" id="password" name="password" required>
+                                                    class="form-control" id="password" name="password" required
+                                                    placeholder="Masukkan Kata Sandi">
                                             </div>
                                         </div>
                                     </div>

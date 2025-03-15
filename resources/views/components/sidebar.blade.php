@@ -19,7 +19,7 @@
                             Guru </span></a>
                 </li>
                 <li class="{{ isset($menusubject) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('subjects.index') }}"><i class="far fa-square"></i> <span>Data
+                    <a class="nav-link" href="{{ route('subjects.index') }}"><i class="fas fa-book-open"></i> <span>Data
                             Mapel</span></a>
                 </li>
                 <li class="{{ isset($menuclass) ? 'active' : '' }}">
@@ -33,8 +33,13 @@
                 </li>
                 {{-- Manajemen ujian --}}
                 <li class="menu-header">Manajemen Ujian</li>
-                <li class="{{ isset($menuujian) ? 'active' : '' }}">
+                <li class="{{ isset($menuexam) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('exams.index') }}"><i class="fas fa-edit"></i> <span>Data Ujian
+                        </span></a>
+                </li>
+                <li class="{{ isset($menuquestion) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('questions.index') }}"><i class="fas fa-edit"></i> <span>Soal
+                            Ujian
                         </span></a>
                 </li>
                 {{-- Manajemen admin --}}
@@ -48,16 +53,22 @@
             @if ($user->role == 'siswa')
                 <li class="{{ isset($menustudent) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('student.class') }}"><i class="fas fa-user-graduate"></i>
-                        <span>Daftar
+                        <span>Data
                             Siswa</span></a>
                 </li>
                 <li class="{{ isset($menusubject) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('show.subject') }}"><i class="far fa-square"></i>
-                        <span>Daftar Mapel</span></a>
+                    <a class="nav-link" href="{{ route('show.subject') }}"><i class="fas fa-book-open"></i>
+                        <span>Data Mapel</span></a>
+                </li>
+                <li class="{{ isset($menuexam) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('exams.test') }}">
+                        <i class="fas fa-chalkboard"></i>
+                        <span>Ujian Online</span>
+                    </a>
                 </li>
                 <li class="{{ isset($menuassignment) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('show.assignment') }}">
-                        <i class="fas fa-chalkboard"></i>
+                        <i class="fas fa-file-word"></i>
                         <span>Penugasan</span>
                     </a>
                 </li>
@@ -81,17 +92,15 @@
                     <a class="nav-link" href="{{ route('assignments.index') }}"><i class="fas fa-laptop-file"></i>
                         <span>Data Tugas</span></a>
                 </li>
+                <li class="{{ isset($menugrade) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('assignments.index') }}"><i class="fas fa-file-excel"></i>
+                        <span>Data Nilai</span></a>
+                </li>
                 <li class="{{ isset($menuprofile) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('profile.edit') }}"><i class="fas fa-user-pen"></i>
                         <span>Profile</span></a>
                 </li>
             @endif
         </ul>
-        <div class="hide-sidebar-mini mt-4 mb-4 p-3">
-            <a href="https://github.com/MohammadRizkiPrambudi/app-sdgs"
-                class="btn btn-primary btn-lg btn-block btn-icon-split" target="blank">
-                <i class="fas fa-rocket"></i> Dokumentasi Penggunaan
-            </a>
-        </div>
     </aside>
 </div>

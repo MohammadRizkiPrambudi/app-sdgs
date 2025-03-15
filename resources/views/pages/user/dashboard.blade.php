@@ -6,6 +6,17 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('library/jqvmap/dist/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.min.css') }}">
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -13,11 +24,13 @@
         <section class="section">
             <div class="section-header">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <h1>Dashboard</h1>
                     </div>
-                    <div class="col-12">
-                        <p style="color: #6777ef; font-size: larger">Hallo Selamat Datang {{ $user->name }} 😁</p>
+                    <div class="col-md-12 mt-2">
+                        <p style="color: #375a7f; font-size: larger; font-weight: 500;">
+                            Hai, {{ $user->name }}! Semoga harimu menyenangkan ya. 😁
+                        </p>
                     </div>
                 </div>
             </div>
@@ -108,7 +121,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Grafik Rata-rata Nilai</h4>
+                            <h4>Grafik Rata-rata Nilai Pertugas</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="assignmentGradesChart"></canvas>
@@ -138,7 +151,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Statistik</h4>
+                            <h4>Grafik Rata-rata Nilai Per Mata Pelajaran</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="subjectGradesChart"></canvas>
