@@ -14,7 +14,13 @@
             <div class="card">
                 <div class="card-body">
                     @if ($assignments->isEmpty())
-                        <div class="alert alert-info">Belum ada tugas</div>
+                        <div class="col-12">
+                            <div class="alert alert-info text-center">
+                                <i class="fas fa-info-circle fa-2x mb-2"></i>
+                                <h5>Belum ada tugas</h5>
+                                <p>Guru belum memberikan tugas untuk saat ini.</p>
+                            </div>
+                        </div>
                     @else
                         <ul class="list-group">
                             @foreach ($assignments as $assignment)

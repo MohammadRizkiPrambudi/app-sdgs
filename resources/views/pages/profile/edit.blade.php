@@ -28,7 +28,8 @@
                             <div class="profile-widget-description">
                                 <div class="profile-widget-name">{{ $user->name }}
                                     <div class="text-muted d-inline font-weight-normal">
-                                        <div class="slash"></div> Kelas
+                                        <div class="slash"></div>
+                                        Kelas {{ $user->student->class->name ?? 'Belum Terdaftar di Kelas' }}
                                     </div>
                                 </div>
                             </div>

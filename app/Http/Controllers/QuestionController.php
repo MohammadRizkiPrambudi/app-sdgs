@@ -13,15 +13,45 @@ class QuestionController extends Controller
     {
         $user         = Auth::user();
         $menuquestion = '';
-        $exams        = Exam::with(['class', 'subject', 'questions'])->get();
+
+        if ($user->role === 'admin') {
+            $exams = Exam::with(['class', 'subject', 'questions'])->get();
+        } else {
+            $teacher = $user->teacher;
+
+            $exams = Exam::whereHas('class.teachers', function ($query) use ($teacher) {
+                $query->where('teachers.id', $teacher->id);
+            })
+                ->whereHas('subject.teachers', function ($query) use ($teacher) {
+                    $query->where('teachers.id', $teacher->id);
+                })
+                ->with(['class', 'subject', 'questions'])
+                ->get();
+        }
+
         return view('pages.questions.index', compact('exams', 'user', 'menuquestion'));
     }
 
     public function create()
     {
         $user         = Auth::user();
-        $exams        = Exam::all();
         $menuquestion = '';
+
+        if ($user->role === 'admin') {
+            $exams = Exam::with('class', 'subject')->get();
+        } else {
+            $teacher = $user->teacher;
+
+            $exams = Exam::whereHas('class.teachers', function ($query) use ($teacher) {
+                $query->where('teachers.id', $teacher->id);
+            })
+                ->whereHas('subject.teachers', function ($query) use ($teacher) {
+                    $query->where('teachers.id', $teacher->id);
+                })
+                ->with('class', 'subject')
+                ->get();
+        }
+
         return view('pages.questions.create', compact('user', 'exams', 'menuquestion'));
     }
 

@@ -53,7 +53,13 @@
                 <div class="card-header">Daftar Tugas Terbaru</div>
                 <div class="card-body">
                     @if ($assignments->isEmpty())
-                        <div class="alert alert-info">Belum ada tugas</div>
+                        <div class="col-12">
+                            <div class="alert alert-info text-center">
+                                <i class="fas fa-info-circle fa-2x mb-2"></i>
+                                <h5>Belum ada tugas</h5>
+                                <p>Guru belum memberikan tugas untuk saat ini.</p>
+                            </div>
+                        </div>
                     @else
                         <ul class="list-group">
                             @foreach ($assignments as $assignment)
@@ -75,8 +81,13 @@
                                                         class="fas fa-hourglass-half"></i> Menunggu Penilaian</span>
                                             @endif
                                         @else
-                                            <a href="{{ route('submissions.create', $assignment->id) }}"
-                                                class="btn btn-primary btn-sm">Unggah Tugas</a>
+                                            <!-- Ganti dengan tombol modal -->
+                                            <a href="#" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#uploadModal" data-id="{{ $assignment->id }}"
+                                                data-name="{{ $assignment->subject->name }}"
+                                                data-title="{{ $assignment->title }}" onclick="openUploadModal(this)">
+                                                Kerjakan
+                                            </a>
                                         @endif
                                     </div>
                                 </li>
@@ -87,12 +98,59 @@
             </div>
         </section>
     </div>
+
+    <!-- Modal Unggah Tugas -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="uploadForm" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadModalLabel">Unggah Tugas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="assignment_id">
+                        <div class="form-group">
+                            <label for="assignment_name">Nama Tugas</label>
+                            <input type="text" class="form-control" id="assignment_name" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">File Tugas</label>
+                            <input type="file" name="file" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Kumpulkan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
     <!-- JS Libraries -->
     <script src="{{ asset('library/chart.js/dist/Chart.min.js') }}"></script>
     <script>
+        function openUploadModal(element) {
+            const assignmentId = element.getAttribute('data-id');
+            const assignmentName = element.getAttribute('data-name');
+            const assignmentTitle = element.getAttribute('data-title');
+
+            document.getElementById('assignment_id').value = assignmentId;
+            document.getElementById('assignment_name').value = "Tugas " + assignmentName + "- " + assignmentTitle;
+
+            // Ubah action form
+            const form = document.getElementById('uploadForm');
+            form.action = `/assignments/${assignmentId}/submit`; // Sesuaikan dengan route
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             var subjectNames = @json($subjects->pluck('name'));
             var subjectGrades = @json($subjectGrades);

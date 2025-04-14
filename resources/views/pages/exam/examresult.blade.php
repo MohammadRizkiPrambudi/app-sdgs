@@ -37,7 +37,7 @@
                                 @endif
 
                                 <!-- Tombol Navigasi -->
-                                <a href="{{ route('exams.index') }}" class="btn btn-primary mt-3">
+                                <a href="{{ route('exams.test') }}" class="btn btn-primary mt-3">
                                     <i class="fas fa-arrow-left"></i> Kembali ke Daftar Ujian
                                 </a>
                             </div>

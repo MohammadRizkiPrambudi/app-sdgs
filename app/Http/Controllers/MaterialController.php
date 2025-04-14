@@ -6,6 +6,8 @@ use App\Models\Material;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MaterialController extends Controller
@@ -19,29 +21,32 @@ class MaterialController extends Controller
             return redirect()->route('dashboard')->with('error', 'Teacher not found.');
         }
 
-        $materials = Material::whereHas('class', function ($query) use ($teacher) {
-            $query->where('teacher_id', $teacher->id);
-        })->get();
-
-        $subjects = Subject::whereHas('classes', function ($query) use ($teacher) {
-            $query->where('teacher_id', $teacher->id);
-        })->get();
+        // Ambil kombinasi kelas & mapel yang diajar guru
+        $classSubjects = DB::table('class_teacher')
+            ->where('teacher_id', $teacher->id)
+            ->join('classes', 'class_teacher.class_id', '=', 'classes.id')
+            ->join('subjects', 'class_teacher.subject_id', '=', 'subjects.id')
+            ->select('classes.id as class_id', 'classes.name as class_name',
+                'subjects.id as subject_id', 'subjects.name as subject_name')
+            ->get();
 
         $menumaterial = 'active';
         $title        = 'Hapus Materi!';
-        $text         = "Aapakah anda yakin akan menghapus?";
+        $text         = "Apakah anda yakin akan menghapus?";
         confirmDelete($title, $text);
-        return view('pages.material.index', compact('materials', 'menumaterial', 'user', 'subjects'));
+        return view('pages.material.index', compact('classSubjects', 'menumaterial', 'user'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $user         = Auth::user();
-        $teacher      = $user->teacher;
-        $classes      = $teacher->classes;
-        $subjects     = Subject::all();
+        $user      = Auth::user();
+        $classId   = $request->query('class_id');
+        $subjectId = $request->query('subject_id');
+
+        $class        = Classes::findOrFail($classId); // Sesuaikan nama modelnya
+        $subject      = Subject::findOrFail($subjectId);
         $menumaterial = 'active';
-        return view('pages.material.create', compact('classes', 'subjects', 'menumaterial', 'user'));
+        return view('pages.material.create', compact('class', 'subject', 'menumaterial', 'user'));
     }
 
     public function store(Request $request)
@@ -51,21 +56,37 @@ class MaterialController extends Controller
             'content'    => 'required|string',
             'class_id'   => 'required|exists:classes,id',
             'subject_id' => 'required|exists:subjects,id',
+            'video_url'  => 'nullable|url',
         ]);
-        $user    = Auth::user();
-        $teacher = $user->teacher;
-        $class   = Classes::where('id', $request->class_id)->where('teacher_id', $teacher->id)->first();
-        $subject = Subject::where('id', $request->subject_id)->first();
-        if (! $class) {
-            return redirect()->route('materials.create')->with('error', 'You are not authorized to add materials to this class.');
+
+        $teacher = Auth::user()->teacher;
+
+        // Cek apakah guru memang mengajar mapel tersebut di kelas itu
+        $isAuthorized = \DB::table('class_teacher')
+            ->where('teacher_id', $teacher->id)
+            ->where('class_id', $request->class_id)
+            ->where('subject_id', $request->subject_id)
+            ->exists();
+
+        if (! $isAuthorized) {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan menambahkan materi untuk kelas dan mapel ini.');
+        }
+
+        $video_url = $request->input('video_url');
+        if (Str::contains($video_url, 'watch?v=')) {
+            $embed_url = preg_replace('/watch\?v=([a-zA-Z0-9_-]+)/', 'embed/$1', $video_url);
+        } else {
+            $embed_url = $video_url;
         }
 
         Material::create([
             'title'      => $request->title,
             'content'    => $request->content,
-            'class_id'   => $class->id,
-            'subject_id' => $subject->id,
+            'class_id'   => $request->class_id,
+            'subject_id' => $request->subject_id,
+            'video_url'  => $embed_url,
         ]);
+
         Alert::success('Hore!', 'Materi Berhasil Ditambahkan');
         return redirect()->route('materials.index');
     }
@@ -106,39 +127,44 @@ class MaterialController extends Controller
 
     public function edit(Material $material)
     {
-        $user         = Auth::user();
-        $classes      = Classes::all();
-        $subjects     = Subject::all();
+        $user    = Auth::user();
+        $teacher = $user->teacher;
+
+        // Cek apakah guru mengajar mapel ini di kelas ini
+        $mengajar = DB::table('class_teacher')
+            ->where('class_id', $material->class_id)
+            ->where('subject_id', $material->subject_id)
+            ->where('teacher_id', $teacher->id)
+            ->exists();
+
+        if (! $mengajar) {
+            return redirect()->route('materials.index')->with('error', 'Anda tidak berhak mengedit materi ini.');
+        }
+
         $menumaterial = 'active';
-        return view('pages.material.edit', compact('material', 'classes', 'subjects', 'menumaterial', 'user'));
+        return view('pages.material.edit', compact('material', 'menumaterial', 'user'));
     }
 
     public function update(Request $request, Material $material)
     {
         $request->validate([
-            'title'      => 'required|string|max:255',
-            'content'    => 'required|string',
-            'class_id'   => 'required|exists:classes,id',
-            'subject_id' => 'required|exists:subjects,id',
+            'title'     => 'required|string|max:255',
+            'content'   => 'required|string',
+            'video_url' => 'nullable|url',
         ]);
 
-        $user    = Auth::user();
-        $teacher = $user->teacher;
-        $class   = Classes::where('id', $request->class_id)->where('teacher_id', $teacher->id)->first();
-        $subject = Subject::where('id', $request->subject_id)->first();
-
-        if (! $class) {
-            return redirect()->route('materials.edit', $material->id)->with('error', 'You are not authorized to update materials for this class.');
+        $video_url = $request->input('video_url');
+        if ($video_url && Str::contains($video_url, 'watch?v=')) {
+            $video_url = preg_replace('/watch\?v=([a-zA-Z0-9_-]+)/', 'embed/$1', $video_url);
         }
 
         $material->update([
-            'title'      => $request->title,
-            'content'    => $request->content,
-            'class_id'   => $class->id,
-            'subject_id' => $subject->id,
+            'title'     => $request->title,
+            'content'   => $request->content,
+            'video_url' => $video_url,
         ]);
 
-        Alert::success('Hore!', 'Materi Berhasil Diperbarui');
+        Alert::success('Berhasil', 'Materi berhasil diperbarui!');
         return redirect()->route('materials.index');
     }
 
@@ -156,7 +182,9 @@ class MaterialController extends Controller
         $class       = $student->class;
         $subjectname = $subject->name;
         $menusubject = 'active';
-        $materials   = $subject->materials()->whereIn('class_id', $subject->classes->pluck('id'))->get();
+
+        // Ambil materi berdasarkan kelas siswa
+        $materials = $subject->materials()->where('class_id', $class->id)->get();
         return view('pages.material.bysubject', compact('subject', 'materials', 'user', 'subjectname', 'menusubject'));
     }
 

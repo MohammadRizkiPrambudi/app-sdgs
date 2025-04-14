@@ -68,7 +68,7 @@
                         <div class="card subject-card shadow">
                             <div class="card-body text-center">
                                 <h5 class="card-title font-weight-bold">{{ $subject->name }}</h5>
-                                <p><strong>Guru:</strong> {{ $teacher->name }}</p>
+                                <p><strong>Guru:</strong> {{ $teachersBySubject[$subject->id] ?? 'Belum ditentukan' }}</p>
                                 <a href="{{ route('materials.subject', $subject->id) }}" class="btn"><i
                                         class="fas fa-eye mr-1"></i> Lihat Materi</a>
                             </div>

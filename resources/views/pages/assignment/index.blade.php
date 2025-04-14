@@ -3,12 +3,12 @@
 @section('title', 'Data Tugas')
 
 @push('style')
-    <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 @endpush
 
-@section('main')<div class="main-content">
+@section('main')
+    <div class="main-content">
         <section class="section">
             <div class="section-header">
                 <h1>Data Tugas</h1>
@@ -17,16 +17,15 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Daftar Data Tugas</h4>
-                            </div>
                             <div class="card-body">
-
                                 <a href="{{ route('assignments.create') }}" class="btn btn-primary mb-3"><i
                                         class="fas fa-plus-circle"></i> Tambah
                                     Tugas</a>
                                 @if ($assignments->isEmpty())
-                                    <p>Belum ada tugas</p>
+                                    <div class="alert alert-info text-center">
+                                        <i class="fas fa-info-circle fa-2x mb-2"></i>
+                                        <h5>Belum ada tugas</h5>
+                                    </div>
                                 @else
                                     <div class="table-responsive">
                                         <table class="table-striped table" id="table-1">
@@ -53,7 +52,7 @@
                                                         <td class="text-center">{{ $assignment->subject->name }}</td>
                                                         <td class="text-center">
                                                             <a href="{{ route('assignments.edit', $assignment->id) }}"
-                                                                class="btn btn-sm btn-warning"><i
+                                                                class="btn btn-warning"><i
                                                                     class="fas fa-edit mr-1"></i>Edit</a>
                                                         </td>
                                                     </tr>
@@ -72,10 +71,8 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
     <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 @endpush

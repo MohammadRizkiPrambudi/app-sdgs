@@ -30,21 +30,25 @@
                                     <table class="table-striped table" id="table-1">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Nama Ujian</th>
-                                                <th>Kelas</th>
-                                                <th>Mata Pelajaran</th>
-                                                <th>Aksi</th>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Nama Ujian</th>
+                                                <th class="text-center">Kelas</th>
+                                                <th class="text-center">Tanggal</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($exams as $index => $exam)
                                                 <tr>
-                                                    <td>{{ $index + 1 }}</td>
-                                                    <td>{{ $exam->title }}</td>
-                                                    <td>{{ $exam->class->name }}</td>
-                                                    <td>{{ $exam->subject->name }}</td>
-                                                    <td>
+                                                    <td class="text-center">{{ $index + 1 }}</td>
+                                                    <td class="text-center">{{ $exam->title }}</td>
+                                                    <td class="text-center">
+                                                        {{ $exam->class->name }} / {{ $exam->subject->name }}</td>
+                                                    <td class="text-center">
+                                                        {{ \Carbon\Carbon::parse($exam->start_time)->format('d M Y, H:i') }}
+                                                        WIB
+                                                    </td>
+                                                    <td class="text-center">
                                                         @if ($exam->is_completed)
                                                             <a href="{{ route('exams.result', $exam) }}"
                                                                 class="btn btn-success">
@@ -92,7 +96,7 @@
                                 <label for="token">Token Ujian:</label>
                                 <input type="text" name="token" id="token" class="form-control" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Mulai Ujian</button>
+                            <button type="submit" class="btn btn-primary">Kerjakan</button>
                         </form>
                     </div>
                 </div>

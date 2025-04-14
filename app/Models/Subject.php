@@ -24,4 +24,10 @@ class Subject extends Model
         return $this->hasMany(Material::class, 'subject_id');
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'class_teacher', 'subject_id', 'teacher_id')
+            ->withPivot('class_id');
+    }
+
 }

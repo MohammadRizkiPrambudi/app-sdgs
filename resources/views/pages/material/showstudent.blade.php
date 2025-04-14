@@ -3,6 +3,31 @@
 @section('title', 'Detail Materi Materi')
 
 @push('style')
+    <style>
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            min-height: 250px;
+            /* Ganti dengan tinggi minimum video */
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card {
+            min-height: 350px;
+            /* Ganti dengan tinggi yang sesuai */
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -23,11 +48,22 @@
                     <div class="col-md-4">
                         <div class="card rounded-box">
                             <div class="card-body">
-                                <iframe id="video-frame" width="280" height="315"
-                                    src="https://www.youtube.com/embed/jSZgKobVukk?si=Sml05nP2_XA4QjH8" frameborder="0"
-                                    allowfullscreen onerror="showFallback()"></iframe>
-                                <p id="video-fallback" class="text-danger d-none">Video tidak dapat dimuat. Periksa koneksi
-                                    internet Anda.</p>
+                                <div class="card-body">
+                                    @if ($material->video_url)
+                                        <div class="video-responsive">
+                                            <iframe id="video-frame" src="{{ $material->video_url }}" frameborder="0"
+                                                allowfullscreen onerror="showFallback()"></iframe>
+                                        </div>
+                                        <p id="video-fallback" class="text-danger d-none">
+                                            Video tidak dapat dimuat. Periksa koneksi internet Anda.
+                                        </p>
+                                    @else
+                                        <img src="https://placehold.co/280x180?text=Video+Tidak+Tersedia&font=roboto"
+                                            alt="Tidak ada video" class="img-fluid">
+                                        <p class="text-muted mt-2">Tidak ada video yang disertakan untuk materi ini.</p>
+                                    @endif
+                                </div>
+
                             </div>
                         </div>
                     </div>

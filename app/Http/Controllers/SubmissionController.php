@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
@@ -23,8 +22,8 @@ class SubmissionController extends Controller
             $filePath = $request->file('file')->store('submissions');
             Submission::create([
                 'assignment_id' => $assignment->id,
-                'student_id' => Auth::user()->student->id,
-                'file_path' => $filePath]);
+                'student_id'    => Auth::user()->student->id,
+                'file_path'     => $filePath]);
             Alert::success('Hore', 'Tugasmu Berhasil Diunggah');
             return redirect()->route('student.dashboard');
         } catch (\Exception $e) {
@@ -40,9 +39,24 @@ class SubmissionController extends Controller
         $submission->update(['grade' => $request->grade]);
         return redirect()->route('assignments.index')->with('success', 'Nilai berhasil diperbarui');
     }
+
     public function download(Submission $submission)
     {
         return Storage::download($submission->file_path);
+    }
+
+    public function preview(Submission $submission)
+    {
+        // Mengecek apakah file yang diunggah merupakan file PDF atau dokumen lainnya
+        $filePath = storage_path('app/' . $submission->file_path);
+
+        if (file_exists($filePath)) {
+            // Mengembalikan file dengan type sesuai
+            return response()->file($filePath);
+        }
+
+        // Menampilkan error jika file tidak ditemukan
+        return abort(404, 'File tidak ditemukan');
     }
 
 }

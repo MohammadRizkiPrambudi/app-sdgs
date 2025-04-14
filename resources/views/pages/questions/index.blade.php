@@ -78,7 +78,7 @@
                     </div>
                     <div class="modal-body">
                         @if ($exam->questions->isEmpty())
-                            <div class="alert alert-info">Belum ada soal untuk ujian ini.</div>
+                            <div class="alert alert-info mt-3">Belum ada soal untuk ujian ini.</div>
                         @else
                             <!-- Container untuk menampilkan soal -->
                             <div id="soalContainer{{ $exam->id }}">
@@ -93,7 +93,7 @@
                         @endif
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>

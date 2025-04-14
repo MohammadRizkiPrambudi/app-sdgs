@@ -3,6 +3,32 @@
 @section('title', 'Kerjakan Ujian')
 
 @push('style')
+    <style>
+        .card-body h6 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .form-check {
+            margin-bottom: 8px;
+        }
+
+        .form-check.selected {
+            background-color: #d4edda;
+            /* warna hijau lembut */
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .pagination .page-link {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 26px;
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -24,11 +50,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- Timer -->
-                                <div id="timer" class="text-center mb-4">
-                                    <div class="alert alert-danger alert-has-icon">
-                                        <div class="alert-body">
-                                            <h4>Sisa Waktu: <span id="time">00:00</span></h4>
-                                        </div>
+                                <div class="alert alert-warning alert-has-icon shadow-sm">
+                                    <div class="alert-icon"><i class="fas fa-clock"></i></div>
+                                    <div class="alert-body">
+                                        <h5>Sisa Waktu: <span id="time"
+                                                class="font-weight-bold text-white">00:00</span></h5>
                                     </div>
                                 </div>
                                 <!-- Soal -->
@@ -121,20 +147,21 @@
 
         document.querySelectorAll('.page-link').forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // Mencegah perilaku default link
-
-                // Ambil ID soal dari atribut data-soal
+                e.preventDefault();
                 const soalId = this.getAttribute('data-soal');
 
-                // Sembunyikan semua soal
-                document.querySelectorAll('.soal-group').forEach(soal => {
-                    soal.style.display = 'none';
-                });
+                // Hide all soal
+                document.querySelectorAll('.soal-group').forEach(soal => soal.style.display = 'none');
 
-                // Tampilkan soal yang dipilih
+                // Show selected soal
                 document.getElementById(`soal${soalId}`).style.display = 'block';
+
+                // Highlight active
+                document.querySelectorAll('.page-item').forEach(li => li.classList.remove('active'));
+                this.parentElement.classList.add('active');
             });
         });
+
 
         document.getElementById('selesaiBtn').addEventListener('click', function() {
             Swal.fire({
@@ -152,6 +179,27 @@
                 }
             });
         });
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const questionId = this.name.replace('jawaban', '');
+
+                // Hilangkan warna dari semua opsi jawaban soal ini
+                document.querySelectorAll(`input[name="jawaban${questionId}"]`).forEach(i => {
+                    i.closest('.form-check').classList.remove('selected');
+                });
+
+                // Tambahkan warna ke opsi yang dipilih
+                this.closest('.form-check').classList.add('selected');
+
+                // Warnai nomor soal di bawah pagination
+                const pageLink = document.querySelector(`a[data-soal="${parseInt(questionId)}"]`);
+                if (pageLink) {
+                    pageLink.classList.add('bg-success', 'text-white');
+                }
+            });
+        });
+
 
         function submitExam() {
             const answers = [];

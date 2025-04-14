@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Models\Classes;
@@ -9,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Material extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'content', 'class_id', 'subject_id'];
+    protected $fillable = ['title', 'content', 'class_id', 'subject_id', 'video_url'];
 
     public function class ()
     {

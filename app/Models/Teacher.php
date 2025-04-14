@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Models\Classes;
@@ -13,9 +12,15 @@ class Teacher extends Model
     use HasFactory;
     protected $fillable = ['name', 'user_id'];
 
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'class_teacher', 'teacher_id', 'subject_id')
+            ->withPivot('class_id');
+    }
+
     public function classes()
     {
-        return $this->hasMany(Classes::class, 'teacher_id');
+        return $this->belongsToMany(Classes::class, 'class_teacher', 'teacher_id', 'class_id');
     }
 
     public function user()

@@ -15,13 +15,58 @@ class ExamController extends Controller
 {
     public function index()
     {
+        // $user     = Auth::user();
+        // $menuexam = '';
+        // $classes  = Classes::all();
+        // $subjects = Subject::all();
+        // $exams    = Exam::with(['class', 'subject'])->get();
+        // $title    = 'Hapus Ujian!';
+        // $text     = "Apakah anda yakin akan menghapus?";
+        // confirmDelete($title, $text);
+        // return view('pages.exam.index', compact('exams', 'user', 'menuexam', 'classes', 'subjects'));
+
         $user     = Auth::user();
         $menuexam = '';
-        $classes  = Classes::all();
-        $subjects = Subject::all();
-        $exams    = Exam::with(['class', 'subject'])->get();
+        $title    = 'Hapus Ujian!';
+        $text     = "Apakah anda yakin akan menghapus?";
+        confirmDelete($title, $text);
+
+        if ($user->role === 'admin') {
+            $classes  = Classes::all();
+            $subjects = Subject::all();
+            $exams    = Exam::with(['class', 'subject'])->get();
+        } else {
+            $teacher  = $user->teacher;
+            $classes  = $teacher->classes;  // relasi dari class_teacher
+            $subjects = $teacher->subjects; // relasi ke subject
+            $exams    = Exam::with(['class', 'subject'])
+                ->whereIn('class_id', $classes->pluck('id'))
+                ->whereIn('subject_id', $subjects->pluck('id'))
+                ->get();
+        }
+
         return view('pages.exam.index', compact('exams', 'user', 'menuexam', 'classes', 'subjects'));
+
     }
+
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'title'       => 'required|string|max:255',
+    //         'description' => 'nullable|string',
+    //         'class_id'    => 'required|exists:classes,id',
+    //         'subject_id'  => 'required|exists:subjects,id',
+    //         'start_time'  => 'required|date',
+    //         'end_time'    => 'required|date|after:start_time',
+    //     ]);
+    //     $subject     = Subject::find($request->subject_id);
+    //     $currentDate = now()->format('Ymd');
+    //     $token       = strtoupper(substr($subject->name, 0, 3)) . '_' . $currentDate;
+    //     $request->merge(['token' => $token]);
+    //     Exam::create($request->all());
+    //     Alert::success('Hore!', 'Ujian Berhasil Ditambahkan');
+    //     return redirect()->route('exams.index');
+    // }
 
     public function store(Request $request)
     {
@@ -33,36 +78,44 @@ class ExamController extends Controller
             'start_time'  => 'required|date',
             'end_time'    => 'required|date|after:start_time',
         ]);
+
+        $user = Auth::user();
+
+        // Kalau guru, cek apakah dia memang mengajar mapel tersebut di kelas tersebut
+        if ($user->role === 'teacher') {
+            $teacher = $user->teacher;
+            $isValid = $teacher->classes()->where('class_id', $request->class_id)->exists() &&
+            $teacher->subjects()->where('subject_id', $request->subject_id)->exists();
+
+            if (! $isValid) {
+                return redirect()->back()->with('error', 'Anda tidak berhak membuat ujian untuk kelas/mapel ini.');
+            }
+        }
+
+        // Generate token
         $subject     = Subject::find($request->subject_id);
         $currentDate = now()->format('Ymd');
         $token       = strtoupper(substr($subject->name, 0, 3)) . '_' . $currentDate;
         $request->merge(['token' => $token]);
+
         Exam::create($request->all());
+        Alert::success('Hore!', 'Ujian Berhasil Ditambahkan');
         return redirect()->route('exams.index');
-    }
-
-    public function show(Exam $exam)
-    {
-        return view('exams.show', compact('exam'));
-    }
-
-    public function edit(Exam $exam)
-    {
-        return view('exams.edit', compact('exam'));
     }
 
     public function update(Request $request, Exam $exam)
     {
         $request->validate([
-            'title'       => 'required',
-            'description' => 'required',
-            'class_id'    => 'required',
-            'subject_id'  => 'required',
-            'token'       => 'required',
-            'start_time'  => 'required',
-            'end_time'    => 'required',
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'class_id'    => 'required|exists:classes,id',
+            'subject_id'  => 'required|exists:subjects,id',
+            'token'       => 'required|string|max:255',
+            'start_time'  => 'required|date',
+            'end_time'    => 'required|date|after:start_time',
         ]);
         $exam->update($request->all());
+        Alert::success('Hore!', 'Ujian Berhasil DiPerbarui');
         return redirect()->route('exams.index');
     }
 
@@ -105,7 +158,8 @@ class ExamController extends Controller
         }
         $remainingTime = $endTime->diffInSeconds($now);
         session(['exam_start_time' => $now]);
-        $questions = $exam->questions;
+        // $questions = $exam->questions;
+        $questions = $exam->questions->shuffle();
         return view('pages.exam.startexamstudent', compact('exam', 'questions', 'user', 'menuexam', 'remainingTime'));
     }
 

@@ -27,33 +27,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="teacher_id">Guru</label>
-                                                <select class="form-control rounded-box" id="teacher_id" name="teacher_id">
-                                                    <option value="" disabled selected> --Pilih Guru --
-                                                    </option>
-                                                    @foreach ($teachers as $teacher)
-                                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="subject_id">Pilih Mata Pelajaran</label>
-                                                <select class="form-control select2" id="subject_id" name="subjects[]"
-                                                    multiple required>
-                                                    @foreach ($subjects as $subject)
-                                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button type="submit" class="btn btn-primary rounded-box"><i
                                             class="fas fa-save mr-1"></i>Simpan</button>
                                     <a href="{{ route('classes.index') }}" class="btn btn-danger rounded-box"><i

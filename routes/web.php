@@ -4,6 +4,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProfileController;
@@ -48,6 +49,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('materials', MaterialController::class);
     Route::resource('exams', ExamController::class);
     Route::resource('questions', QuestionController::class);
+    Route::post('/classes/{class}/add-teacher-subject', [ClassController::class, 'addTeacherSubject'])->middleware('role:admin')
+        ->name('classes.add_teacher_subject');
+    Route::get('/grades', [GradeController::class, 'index'])->name('grades.index');
+    Route::get('/grades/{class_id}/{subject_id}', [GradeController::class, 'show'])->name('grades.show');
+    Route::get('/grades/{assignment}/export-pdf', [GradeController::class, 'exportPdf'])->name('grades.exportPdf');
+    Route::get('/exam-grades', [GradeController::class, 'examIndex'])->name('grades.examIndex');
+    Route::get('/exam-grades/{exam}', [GradeController::class, 'examShow'])->name('grades.examShow');
+    Route::get('/exam-grades/{exam}/export-pdf', [GradeController::class, 'examExportPdf'])->name('grades.examExportPdf');
+    Route::get('/teacher/grade-assignment/{assignment}/export-pdf', [TeacherController::class, 'exportAssignmentPdf'])->name('teacher.gradesAssignmentExport');
+    Route::get('/teacher/grade-exam/{exam}/export-pdf', [TeacherController::class, 'exportExamGradesPdf'])->name('teacher.examGradesExport');
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {
@@ -56,6 +67,13 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::resource('assignments', AssignmentController::class);
     Route::post('submissions/{submission}/grade', [SubmissionController::class, 'grade'])->name('submissions.grade');
     Route::get('submissions/{submission}/download', [SubmissionController::class, 'download'])->name('submissions.download');
+    Route::get('/submission/{submission}/preview', [SubmissionController::class, 'preview'])->name('submissions.preview');
+    Route::get('/teacher/class/{id}/students/json', [TeacherController::class, 'studentsJson'])->name('class.students.json');
+    Route::get('/teacher/grade-assignment', [TeacherController::class, 'gradeAssignment'])->name('teacher.grades');
+    Route::get('/teacher/grade-assignment/{class_id}/{subject_id}', [TeacherController::class, 'showAssignment'])->name('teacher.grades.show');
+    Route::get('/teacher/grade-exam', [TeacherController::class, 'examGrades'])->name('teacher.examGrades');
+    Route::get('/teacher/grade-exam/{exam}', [TeacherController::class, 'examGradesDetail'])->name('teacher.examGradesDetail');
+
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
@@ -68,7 +86,8 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::get('/exams/{exam}/start', [ExamController::class, 'examStudentStart'])->name('exams.start');
     Route::post('/exams/{exam}/submit', [ExamController::class, 'submit'])->name('exams.submit');
     Route::get('/exams/{exam}/result', [ExamController::class, 'result'])->name('exams.result');
-
+    Route::get('/student/grade-assignment', [StudentController::class, 'gradeAssignment'])->name('student.assignment');
+    Route::get('/student/grade-exam', [StudentController::class, 'gradeExam'])->name('student.exam');
 });
 
 Route::get('/tes', function () {

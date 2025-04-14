@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\Student;
+use App\Models\StudentAnswer;
 use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,13 +96,19 @@ class StudentController extends Controller
         $user        = Auth::user();
         $student     = $user->student;
         $class       = $student->class;
+
         if (! $class) {
             return redirect()->route('dashboard')->with('error', 'Class not found for this student.');
         }
-        $subjects = $class->subjects;
-        $teacher  = $class->teacher;
-        return view('pages.student.showsubject', compact('subjects', 'user', 'menusubject', 'teacher'));
 
+        $subjects          = $class->subjects;
+        $teachersBySubject = \DB::table('class_teacher')
+            ->join('teachers', 'class_teacher.teacher_id', '=', 'teachers.id')
+            ->where('class_teacher.class_id', $class->id)
+            ->select('class_teacher.subject_id', 'teachers.name as teacher_name')
+            ->pluck('teacher_name', 'subject_id'); // hasil: [subject_id => teacher_name]
+
+        return view('pages.student.showsubject', compact('subjects', 'user', 'menusubject', 'teachersBySubject'));
     }
 
     public function showAssignment()
@@ -119,6 +126,49 @@ class StudentController extends Controller
         $menuassignment = 'active';
 
         return view('pages.student.showassignment', compact('user', 'menuassignment', 'assignments', 'submissions'));
+    }
+
+    public function gradeAssignment()
+    {
+        $user                = Auth::user();
+        $student             = $user->student;
+        $menugradeassignment = '';
+
+        // Ambil semua nilai dari submission
+        $submissions = $student->submissions()->with(['assignment.subject'])->get();
+
+        return view('pages.student.gradeassignment', compact('submissions', 'user', 'menugradeassignment'));
+    }
+
+    public function gradeExam()
+    {
+        $user          = Auth::user();
+        $student       = $user->student;
+        $menugradeexam = '';
+
+        // Ambil semua ujian yang pernah dijawab siswa ini
+        $answers = StudentAnswer::with('exam')
+            ->where('student_id', $student->id)
+            ->get()
+            ->groupBy('exam_id');
+
+        $hasilUjian = [];
+
+        foreach ($answers as $examId => $jawaban) {
+            $benar = $jawaban->where('is_correct', true)->count();
+            $total = $jawaban->count();
+
+            $exam = $jawaban->first()->exam ?? null;
+
+            $hasilUjian[] = [
+                'exam'  => $exam,
+                'benar' => $benar,
+                'total' => $total,
+                'nilai' => $total > 0 ? round(($benar / $total) * 100, 2) : 0,
+            ];
+        }
+
+        return view('pages.student.gradeexam', compact('hasilUjian', 'user', 'menugradeexam'));
     }
 
 }
