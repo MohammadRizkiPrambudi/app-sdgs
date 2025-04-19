@@ -4,6 +4,8 @@
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 @endpush
 
 @section('main')
@@ -32,7 +34,7 @@
                                 target="_blank">
                                 <i class="fas fa-print"></i> Cetak PDF
                             </a>
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -42,30 +44,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($assignment->submissions as $submission)
+                                    @foreach ($students as $student)
+                                        @php
+                                            $submission = $submissionsMap[$student->id] ?? null;
+                                        @endphp
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $submission->student->name }}</td>
+                                            <td>{{ $student->name }}</td>
                                             <td>
-                                                @if ($submission->grade)
+                                                @if ($submission && $submission->grade !== null)
                                                     <span
                                                         class="badge badge-{{ $submission->grade >= 75 ? 'success' : 'danger' }}">
                                                         {{ $submission->grade }}
                                                     </span>
-                                                @else
+                                                @elseif ($submission)
                                                     <span class="badge badge-secondary">Belum dinilai</span>
+                                                @else
+                                                    <span class="badge badge-warning">Belum mengumpulkan</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($submission->grade)
+                                                @if ($submission && $submission->grade !== null)
                                                     {{ $submission->grade >= 75 ? 'Lulus' : 'Remedial' }}
-                                                @else
+                                                @elseif ($submission)
                                                     -
+                                                @else
+                                                    Tidak Mengumpulkan
                                                 @endif
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -86,6 +96,10 @@
 
 @push('scripts')
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.select2').select2();

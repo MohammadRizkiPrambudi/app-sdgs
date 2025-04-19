@@ -22,9 +22,10 @@
                                 <a href="{{ route('questions.create') }}" class="btn btn-primary mb-3"><i
                                         class="fas fa-plus-circle"></i> Tambah
                                     Soal</a>
-                                <a href="{{ route('questions.create') }}" class="btn btn-success mb-3"><i
-                                        class="fas fa-file-excel"></i> Import
-                                    Soal</a>
+                                <button type="button" class="btn btn-success mb-3" data-toggle="modal"
+                                    data-target="#importModal">
+                                    <i class="fas fa-file-excel"></i> Import Soal
+                                </button>
                                 <div class="table-responsive">
                                     <table class="table-striped table" id="table-1">
                                         <thead>
@@ -110,6 +111,48 @@
             }),
         ) !!};
     </script>
+
+    <!-- Modal Import Soal -->
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('questions.import') }}" method="POST" enctype="multipart/form-data"
+                class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">Import Soal dari Excel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Pilih Ujian</label>
+                        <select name="exam_id" class="form-control" required>
+                            <option value="" disabled selected>-- Pilih Ujian --</option>
+                            @foreach ($exams as $exam)
+                                <option value="{{ $exam->id }}">{{ $exam->title }} - {{ $exam->class->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload File Excel</label>
+                        <input type="file" name="file" class="form-control" accept=".xlsx,.xls" required>
+                    </div>
+                    <p>Silakan upload file Excel sesuai format:</p>
+                    <a href="{{ asset('template/template_import_soal.xlsx') }}" class="btn btn-sm btn-info mb-3"
+                        target="_blank">
+                        <i class="fas fa-download"></i> Download Template
+                    </a>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Import</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 
 

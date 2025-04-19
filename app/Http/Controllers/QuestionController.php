@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Imports\QuestionsImport;
 use App\Models\Exam;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class QuestionController extends Controller
@@ -116,4 +118,22 @@ class QuestionController extends Controller
         Alert::success('Hore!', 'Soal Ujian Berhasil DiHapus!!');
         return redirect()->route('questions.index');
     }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'exam_id' => 'required|exists:exams,id',
+            'file'    => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new QuestionsImport($request->exam_id), $request->file('file'));
+            Alert::success('Hore!', 'Soal Ujian Berhasil DiImport!!');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Gagal!', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back();
+        }
+    }
+
 }

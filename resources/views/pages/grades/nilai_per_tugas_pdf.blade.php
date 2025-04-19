@@ -48,26 +48,34 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($assignment->submissions as $i => $submission)
+            @foreach ($students as $i => $student)
+                @php
+                    $submission = $submissionsMap[$student->id] ?? null;
+                    $grade = $submission->grade ?? null;
+                @endphp
                 <tr>
                     <td>{{ $i + 1 }}</td>
-                    <td>{{ $submission->student->name }}</td>
-                    <td>{{ $submission->grade ?? '-' }}</td>
+                    <td>{{ $student->name }}</td>
                     <td>
-                        @if ($submission->grade)
-                            {{ $submission->grade >= 75 ? 'Lulus' : 'Remedial' }}
+                        @if ($submission && $grade !== null)
+                            {{ $grade }}
+                        @elseif ($submission)
+                            -
                         @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($submission && $grade !== null)
+                            {{ $grade >= 75 ? 'Lulus' : 'Remedial' }}
+                        @elseif ($submission)
                             Belum dinilai
+                        @else
+                            Belum mengumpulkan
                         @endif
                     </td>
                 </tr>
             @endforeach
-
-            @if ($assignment->submissions->isEmpty())
-                <tr>
-                    <td colspan="4" style="text-align: center;">Belum ada pengumpulan</td>
-                </tr>
-            @endif
         </tbody>
     </table>
 </body>

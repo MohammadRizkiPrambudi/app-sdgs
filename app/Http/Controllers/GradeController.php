@@ -11,6 +11,7 @@ use App\Models\Subject;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Str;
 
 class GradeController extends Controller
 {
@@ -47,27 +48,45 @@ class GradeController extends Controller
         $class   = Classes::findOrFail($class_id);
         $subject = Subject::findOrFail($subject_id);
 
-        $assignments = Assignment::where('class_id', $class_id)
+        $assignment = Assignment::where('class_id', $class_id)
             ->where('subject_id', $subject_id)
-            ->with(['submissions' => function ($query) {
-                $query->with('student')
-                    ->orderBy('grade', 'desc');
-            }])
+            ->with('submissions.student')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->first();
+
+        if (! $assignment) {
+            abort(404, 'Tugas tidak ditemukan.');
+        }
+
+        // Ambil semua siswa di kelas ini
+        $students = Student::where('class_id', $class_id)->get();
+
+        // Mapping submission ke student_id
+        $submissionsMap = $assignment->submissions->keyBy('student_id');
 
         $menugrade = '';
 
-        return view('pages.grades.show', compact('user', 'class', 'subject', 'assignments', 'menugrade'));
+        return view('pages.grades.show', compact('user', 'class', 'subject', 'assignment', 'students', 'submissionsMap', 'menugrade'));
     }
 
-    public function exportPdf(Request $request)
+    public function exportPdf($assignment_id)
     {
-
         $assignment = Assignment::with(['class', 'subject', 'submissions.student'])->findOrFail($assignment_id);
 
-        $pdf = Pdf::loadView('exports.nilai_per_tugas_pdf', compact('assignment'));
-        return $pdf->stream('nilai_' . Str::slug($assignment->title) . '.pdf');
+        // Ambil semua siswa dari kelas terkait
+        $students = Student::where('class_id', $assignment->class_id)->get();
+
+        // Petakan submissions ke student_id
+        $submissionsMap = $assignment->submissions->keyBy('student_id');
+
+        // Kirim ke view PDF
+        $pdf = Pdf::loadView('pages.grades.nilai_per_tugas_pdf', [
+            'assignment'     => $assignment,
+            'students'       => $students,
+            'submissionsMap' => $submissionsMap,
+        ])->setPaper('a4', 'portrait');
+
+        return $pdf->stream('Nilai_' . Str::slug($assignment->title) . '.pdf');
     }
 
     public function examIndex(Request $request)

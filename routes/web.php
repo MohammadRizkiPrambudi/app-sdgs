@@ -31,6 +31,7 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/grades/{assignment}/export-pdf', [GradeController::class, 'exportPdf'])->name('grades.exportPdf');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -53,12 +54,13 @@ Route::middleware(['auth'])->group(function () {
         ->name('classes.add_teacher_subject');
     Route::get('/grades', [GradeController::class, 'index'])->name('grades.index');
     Route::get('/grades/{class_id}/{subject_id}', [GradeController::class, 'show'])->name('grades.show');
-    Route::get('/grades/{assignment}/export-pdf', [GradeController::class, 'exportPdf'])->name('grades.exportPdf');
     Route::get('/exam-grades', [GradeController::class, 'examIndex'])->name('grades.examIndex');
     Route::get('/exam-grades/{exam}', [GradeController::class, 'examShow'])->name('grades.examShow');
     Route::get('/exam-grades/{exam}/export-pdf', [GradeController::class, 'examExportPdf'])->name('grades.examExportPdf');
     Route::get('/teacher/grade-assignment/{assignment}/export-pdf', [TeacherController::class, 'exportAssignmentPdf'])->name('teacher.gradesAssignmentExport');
     Route::get('/teacher/grade-exam/{exam}/export-pdf', [TeacherController::class, 'exportExamGradesPdf'])->name('teacher.examGradesExport');
+    Route::post('/questions/import', [QuestionController::class, 'import'])->name('questions.import');
+
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {
@@ -73,7 +75,6 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/teacher/grade-assignment/{class_id}/{subject_id}', [TeacherController::class, 'showAssignment'])->name('teacher.grades.show');
     Route::get('/teacher/grade-exam', [TeacherController::class, 'examGrades'])->name('teacher.examGrades');
     Route::get('/teacher/grade-exam/{exam}', [TeacherController::class, 'examGradesDetail'])->name('teacher.examGradesDetail');
-
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
