@@ -71,7 +71,8 @@
                     </div>
                 </div>
             @elseif(request()->filled(['class_id', 'subject_id']))
-                <div class="alert alert-info">
+                <div class="alert alert-warning mt-4">
+                    <i class="fas fa-exclamation-circle"></i>
                     Tidak ditemukan ujian untuk filter yang dipilih.
                 </div>
             @endif

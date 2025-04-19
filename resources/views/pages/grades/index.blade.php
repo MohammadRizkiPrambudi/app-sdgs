@@ -4,7 +4,6 @@
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 @endpush
@@ -102,8 +101,9 @@
                         </div>
                     </div>
                 @elseif(request()->filled(['class_id', 'subject_id']))
-                    <div class="alert alert-info">
-                        Tidak ditemukan tugas untuk filter yang dipilih.
+                    <div class="alert alert-warning mt-4">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Belum ada tugas untuk kelas dan mata pelajaran yang dipilih.
                     </div>
                 @endif
             </div>
@@ -112,7 +112,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>

@@ -22,7 +22,6 @@ class QuestionsImport implements ToModel
             return null; // Abaikan header
         }
 
-                                                    // Ambil data dari kolom yang benar
         $correctOption = strtolower(trim($row[5])); // Kolom F (jawaban benar)
 
         // Debugging: Menampilkan seluruh nilai baris

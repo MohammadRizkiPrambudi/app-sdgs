@@ -5,6 +5,7 @@
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 
 @section('main')
@@ -24,7 +25,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="class_id">Kelas</label>
-                                    <select name="class_id" class="form-control" required>
+                                    <select name="class_id" class="form-control select2" required>
                                         <option value="">-- Pilih Kelas --</option>
                                         @foreach ($classes as $class)
                                             <option value="{{ $class->id }}"
@@ -38,7 +39,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="subject_id">Mata Pelajaran</label>
-                                    <select name="subject_id" class="form-control" required>
+                                    <select name="subject_id" class="form-control select2" required>
                                         <option value="">-- Pilih Mapel --</option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}"
@@ -94,7 +95,13 @@
                         </div>
                     </div>
                 </div>
+            @elseif(request('class_id') && request('subject_id'))
+                <div class="alert alert-warning mt-4">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Belum ada tugas untuk kelas dan mata pelajaran yang dipilih.
+                </div>
             @endif
+
         </section>
     </div>
 @endsection
@@ -103,4 +110,10 @@
     <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 @endpush

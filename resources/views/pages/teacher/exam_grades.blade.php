@@ -5,6 +5,7 @@
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 
 @section('main')
@@ -25,7 +26,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="class_id">Pilih Kelas</label>
-                                    <select name="class_id" id="class_id" class="form-control" required>
+                                    <select name="class_id" id="class_id" class="form-control select2" required>
                                         <option value="">-- Pilih Kelas --</option>
                                         @foreach ($classes as $class)
                                             <option value="{{ $class->class_id }}"
@@ -37,7 +38,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <label for="subject_id">Pilih Mapel</label>
-                                    <select name="subject_id" id="subject_id" class="form-control" required>
+                                    <select name="subject_id" id="subject_id" class="form-control select2" required>
                                         <option value="">-- Pilih Mapel --</option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->subject_id }}"
@@ -107,8 +108,14 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 @endpush
